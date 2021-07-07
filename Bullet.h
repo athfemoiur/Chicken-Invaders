@@ -16,8 +16,8 @@ public:
     QTimer * timer;
 
 public slots:
-    void move();
-    void moveE();
+//    void move();
+//    void moveE();
 };
 
 #endif // BULLET_H
