@@ -3,6 +3,7 @@
     <file>Images/Main_Background.png</file>
   </qresource>
   <qresource prefix="Icons">
+    <file>Images/Bullet.png</file>
     <file>Images/cross.png</file>
   </qresource>
 </RCC>
