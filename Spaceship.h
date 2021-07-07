@@ -1,7 +1,7 @@
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 #include "QGraphicsPixmapItem"
-#include <QKeyEvent>
+#include "QKeyEvent"
 
 class SpaceShip : public QGraphicsPixmapItem
 {
@@ -10,9 +10,11 @@ public:
     void increaseLife();
     void decreaseLife();
     int getLife() { return life; }
+    int getMeat() { return meat; }
 
 private:
     int life;
+    int meat;
 
 };
 
