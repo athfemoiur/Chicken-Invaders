@@ -19,9 +19,9 @@
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
     <string notr="true">*{
-	font: 14pt &quot;Oswald&quot;;
 	color:rgba(157, 195, 255,200);
-border:7px solid rgb(0, 62, 103);
+	border:7px solid rgb(0, 62, 103);
+	font: 14pt &quot;Architects Daughter&quot;;
 }
 QPushButton{
 	background-color:rgba(6, 47, 110,180);
@@ -36,22 +36,14 @@ QPushButton:hover{
 
 QPushButton:pressed{
 	background-color:rgb(8, 47, 110);
+}
+QPushButton:disabled{
+	background-color:rgba(6, 47, 110,120);
+	color:rgba(157, 195, 255,120);
+	border:2px solid rgba(0, 62, 103 , 120 );
 }</string>
    </property>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>275</x>
-      <y>407</y>
-      <width>350</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Season 1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="season_one_btn">
     <property name="geometry">
      <rect>
       <x>275</x>
@@ -61,10 +53,13 @@ QPushButton:pressed{
      </rect>
     </property>
     <property name="text">
-     <string>Season 2</string>
+     <string>Season 1</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="season_two_btn">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>275</x>
@@ -74,23 +69,13 @@ QPushButton:pressed{
      </rect>
     </property>
     <property name="text">
-     <string>Season 3</string>
+     <string>Season 2</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>275</x>
-      <y>696</y>
-      <width>350</width>
-      <height>50</height>
-     </rect>
+   <widget class="QPushButton" name="season_three_btn">
+    <property name="enabled">
+     <bool>false</bool>
     </property>
-    <property name="text">
-     <string>Exit</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
       <x>275</x>
@@ -100,7 +85,43 @@ QPushButton:pressed{
      </rect>
     </property>
     <property name="text">
-     <string>Load Game</string>
+     <string>Season 3</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exit_btn">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>720</y>
+      <width>131</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Exit</string>
+    </property>
+    <property name="icon">
+     <iconset resource="Resources/Resources.qrc">
+      <normaloff>:/Icons/Images/cross.png</normaloff>:/Icons/Images/cross.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>25</width>
+      <height>25</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="load_game_btn">
+    <property name="geometry">
+     <rect>
+      <x>275</x>
+      <y>407</y>
+      <width>350</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Countinue Game</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -123,11 +144,11 @@ QPushButton:pressed{
     </property>
    </widget>
    <zorder>label</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>pushButton_5</zorder>
+   <zorder>season_one_btn</zorder>
+   <zorder>season_two_btn</zorder>
+   <zorder>season_three_btn</zorder>
+   <zorder>exit_btn</zorder>
+   <zorder>load_game_btn</zorder>
   </widget>
  </widget>
  <resources>

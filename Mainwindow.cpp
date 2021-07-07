@@ -5,8 +5,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     ui->setupUi(this);
+    ui->load_game_btn->hide();
 }
 
 MainWindow::~MainWindow()
@@ -14,8 +15,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_exit_btn_clicked()
 {
-    exit(1);
+     exit(1);
 }
