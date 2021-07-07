@@ -8,7 +8,7 @@ Bullet::Bullet()
     setPixmap(QPixmap(":/Icons/Images/Bullet.png")); // set icon for bullet object
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move())); // connect the timer to the move function
-    timer->start(80); // move every 100 ms
+    timer->start(40); // move every 100 ms
 
 }
 
@@ -28,7 +28,7 @@ void Bullet::move()
 //    }
 
     if(y() > 5)
-        setPos(x(),y() - 10);
+        setPos(x(),y() - 17);
     else {
         scene()->removeItem(this);
         delete this;

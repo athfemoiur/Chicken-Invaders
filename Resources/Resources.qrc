@@ -3,8 +3,8 @@
     <file>Images/Main_Background.png</file>
   </qresource>
   <qresource prefix="Icons">
+    <file>Images/ship.png</file>
     <file>Images/Bullet.png</file>
     <file>Images/cross.png</file>
-    <file>Images/Bullet.png</file>
   </qresource>
 </RCC>

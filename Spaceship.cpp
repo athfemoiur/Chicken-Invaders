@@ -1,8 +1,15 @@
 #include "Spaceship.h"
+#include "Game.h"
+#include <QDebug>
+extern Game * game;
 
 SpaceShip::SpaceShip()
 {
-
+    setPixmap(QPixmap(":/Icons/Images/ship.png"));
+    setPos(600 , 600);
+    life = 3;
+    meat = 0;
+    shootMode = 0;
 }
 
 void SpaceShip::increaseLife()
@@ -13,4 +20,44 @@ void SpaceShip::increaseLife()
 void SpaceShip::decreaseLife()
 {
     life --;
+}
+
+void SpaceShip::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Left)
+    {
+        setPos(x()-10,y());
+        qDebug()<<"left";
+    }
+    else if (event->key() == Qt::Key_Right)
+    {
+        setPos(x()+10,y());
+    }
+    else if(event->key() == Qt::Key_Up)
+    {
+        setPos(x() , y()-10);
+    }
+    else if(event->key() == Qt::Key_Down)
+    {
+        setPos(x() , y()+10);
+    }
+    else if (event->key() == Qt::Key_Space)
+    {
+        if(shootMode == 1)
+        {
+            bullet = new Bullet();
+            bullet->setPos(x(),y());
+            scene()->addItem(bullet);
+
+            bullet = new Bullet();
+            bullet->setPos(x()+25,y());
+            scene()->addItem(bullet);
+        }
+        else
+        {
+            bullet = new Bullet();
+            bullet->setPos(x()+28,y());
+            scene()->addItem(bullet);
+        }
+    }
 }
