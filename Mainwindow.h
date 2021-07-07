@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "Game.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -18,7 +18,10 @@ public:
 private slots:
     void on_exit_btn_clicked();
 
+    void on_season_one_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Game *game;
 };
 #endif // MAINWINDOW_H

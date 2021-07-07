@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     ui->setupUi(this);
     ui->load_game_btn->hide();
+    game = new Game();
 }
 
 MainWindow::~MainWindow()
@@ -18,4 +19,9 @@ MainWindow::~MainWindow()
 void MainWindow::on_exit_btn_clicked()
 {
      exit(1);
+}
+
+void MainWindow::on_season_one_btn_clicked()
+{
+    game->show();
 }

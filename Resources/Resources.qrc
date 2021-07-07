@@ -4,5 +4,6 @@
   </qresource>
   <qresource prefix="Icons">
     <file>Images/cross.png</file>
+    <file>Images/Bullet.png</file>
   </qresource>
 </RCC>

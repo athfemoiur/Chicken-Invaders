@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     Bullet.cpp \
     Chicken.cpp \
+    Game.cpp \
     Spaceship.cpp \
     main.cpp \
     Mainwindow.cpp
@@ -18,6 +19,7 @@ SOURCES += \
 HEADERS += \
     Bullet.h \
     Chicken.h \
+    Game.h \
     Mainwindow.h \
     Spaceship.h
 

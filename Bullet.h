@@ -10,14 +10,10 @@ class Bullet :public QObject,public QGraphicsPixmapItem
 
 public:
     Bullet();
-
-    Bullet(int x, int y);
-
     QTimer * timer;
 
 public slots:
-//    void move();
-//    void moveE();
+    void move();
 };
 
 #endif // BULLET_H
