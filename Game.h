@@ -11,6 +11,7 @@ public:
     Game();
     QGraphicsScene * scene;
     SpaceShip *ship;
+    void mouseMoveEvent(QMouseEvent *event);
 
 };
 

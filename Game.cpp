@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-
+    setMouseTracking(true);
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,1289,720);
  // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
@@ -11,11 +11,14 @@ Game::Game()
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1289,720);
-
-
     ship = new SpaceShip();
     ship->setFlag(QGraphicsItem::ItemIsFocusable);
     ship->setFocus();
     scene->addItem(ship);
 
+}
+
+void Game::mouseMoveEvent(QMouseEvent *event)
+{
+    ship->setPos(event->x()-35 , event->y()-35);
 }

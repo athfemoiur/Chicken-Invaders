@@ -19,9 +19,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_exit_btn_clicked()
 {
      exit(1);
+
 }
 
 void MainWindow::on_season_one_btn_clicked()
 {
     game->show();
+
 }

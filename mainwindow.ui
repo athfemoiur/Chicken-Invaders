@@ -52,6 +52,9 @@ QPushButton:disabled{
       <height>50</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>Season 1</string>
     </property>

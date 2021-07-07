@@ -5,6 +5,7 @@ extern Game * game;
 
 SpaceShip::SpaceShip()
 {
+
     setPixmap(QPixmap(":/Icons/Images/ship.png"));
     setPos(600 , 600);
     life = 3;
@@ -43,21 +44,26 @@ void SpaceShip::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Space)
     {
-        if(shootMode == 1)
-        {
-            bullet = new Bullet();
-            bullet->setPos(x(),y());
-            scene()->addItem(bullet);
+        shoot();
+    }
+}
 
-            bullet = new Bullet();
-            bullet->setPos(x()+25,y());
-            scene()->addItem(bullet);
-        }
-        else
-        {
-            bullet = new Bullet();
-            bullet->setPos(x()+28,y());
-            scene()->addItem(bullet);
-        }
+void SpaceShip::shoot()
+{
+    if(shootMode == 1)
+    {
+        bullet = new Bullet();
+        bullet->setPos(x(),y());
+        scene()->addItem(bullet);
+
+        bullet = new Bullet();
+        bullet->setPos(x()+25,y());
+        scene()->addItem(bullet);
+    }
+    else
+    {
+        bullet = new Bullet();
+        bullet->setPos(x()+28,y());
+        scene()->addItem(bullet);
     }
 }
