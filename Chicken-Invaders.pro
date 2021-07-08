@@ -14,17 +14,16 @@ SOURCES += \
     Game.cpp \
     Spaceship.cpp \
     main.cpp \
-    Mainwindow.cpp
+    mainwindow.cpp
 
 HEADERS += \
     Bullet.h \
     Chicken.h \
     Game.h \
-    Mainwindow.h \
-    Spaceship.h
+    Spaceship.h \
+    mainwindow.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
