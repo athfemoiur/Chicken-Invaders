@@ -3,16 +3,22 @@
 #include <QGraphicsView>
 #include <QWidget>
 #include <QGraphicsScene>
+#include <QPushButton>
 #include "Bullet.h"
 #include "Spaceship.h"
 class Game : public QGraphicsView
 {
 public:
-    Game();
+    Game(int , int , QGraphicsView *parent = nullptr);
+private:
+
     QGraphicsScene * scene;
     SpaceShip *ship;
-    void mouseMoveEvent(QMouseEvent *event);
+private:
 
+    void mouseMoveEvent(QMouseEvent *event);
+private:
+    int width , height;
 };
 
 #endif // GAME_H

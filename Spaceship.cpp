@@ -53,7 +53,7 @@ void SpaceShip::shoot()
     if(shootMode == 1)
     {
         bullet = new Bullet();
-        bullet->setPos(x(),y());
+        bullet->setPos(x(),y()+10);
         scene()->addItem(bullet);
 
         bullet = new Bullet();
@@ -63,7 +63,7 @@ void SpaceShip::shoot()
     else
     {
         bullet = new Bullet();
-        bullet->setPos(x()+28,y());
+        bullet->setPos(x()+20,y()-50);
         scene()->addItem(bullet);
     }
 }

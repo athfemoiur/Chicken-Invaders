@@ -1,11 +1,12 @@
 <RCC>
   <qresource prefix="Backgrounds">
-    <file>Images/Main_Background.png</file>
-    <file>Images/mainBackground.png</file>
+    <file>Images/mainbackround.png</file>
+    <file>Images/gamebackground.png</file>
+
   </qresource>
   <qresource prefix="Icons">
     <file>Images/ship.png</file>
-    <file>Images/Bullet.png</file>
+    <file>Images/bullet.png</file>
     <file>Images/cross.png</file>
   </qresource>
 </RCC>

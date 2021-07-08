@@ -6,6 +6,7 @@ mainWindow::mainWindow()
     hbtn = 80;
     setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
     showMaximized();
+
     StartNewGame = new QPushButton( "Start New Game" , this);
     LoadGame = new QPushButton("Load Game" , this);
     Exit = new QPushButton("Exit" , this);
@@ -20,7 +21,7 @@ mainWindow::mainWindow()
     Exit->setGeometry(50 , y()*2+350 , 170  ,hbtn);
     Exit->setIcon(QIcon( QPixmap(":/Icons/Images/cross.png")));
     Exit->setIconSize(QSize(35 , 35));
-    setStyleSheet("QMainWindow{background-image:url(:/Backgrounds/Images/mainBackground.png);}QPushButton{background-color: rgba(92, 185, 95, 180);border-radius:40;font: 63 28pt \"Bw Stretch Medium\";border:2px solid rgba(92, 185, 95);}QPushButton:hover{background-color: rgba(92, 185, 95, 220);color:rgb(117, 234, 118);}QPushButton:pressed{background-color: rgba(92, 185, 95, 245);}");
+    setStyleSheet("QMainWindow{background-image:url(:/Backgrounds/Images/mainbackround.png);}QPushButton{background-color: rgba(92, 185, 95, 180);border-radius:40;font: 63 28pt \"Bw Stretch Medium\";border:2px solid rgb(92, 185, 95);}QPushButton:hover{background-color: rgba(92, 185, 95, 220);color:rgb(117, 234, 118);}QPushButton:pressed{background-color: rgba(92, 185, 95, 245);}");
     connect(Exit ,&QPushButton::clicked , this , &mainWindow::exitP );
     connect(StartNewGame , &QPushButton::clicked , this , &mainWindow::showGame);
 }
@@ -32,6 +33,6 @@ void mainWindow::exitP()
 
 void mainWindow::showGame()
 {
-    game = new Game();
+    game = new Game(width() , height());
     game->show();
 }

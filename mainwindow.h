@@ -15,7 +15,6 @@ private slots:
     void showGame();
 private:
     QPushButton *LoadGame , *Exit , *StartNewGame , *Credits ;
-    QVBoxLayout *mainLayout;
     int wbtn , hbtn;
     Game *game;
 };
