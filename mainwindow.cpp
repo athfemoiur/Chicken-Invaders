@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-
+extern Game *game;
 mainWindow::mainWindow()
 {
     wbtn = 700;
@@ -15,6 +15,7 @@ mainWindow::mainWindow()
     this->layout()->addWidget(LoadGame);
     this->layout()->addWidget(Credits);
     this->layout()->addWidget(Exit);
+    StartNewGame->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     StartNewGame->setGeometry(x() , y()*2-30 , wbtn , hbtn);
     LoadGame->setGeometry(x() , y()*2+90 , wbtn , hbtn);
     Credits->setGeometry(x() , y()*2+210 , wbtn , hbtn);
@@ -24,6 +25,7 @@ mainWindow::mainWindow()
     setStyleSheet("QMainWindow{background-image:url(:/Backgrounds/Images/mainbackround.png);}QPushButton{background-color: rgba(92, 185, 95, 180);border-radius:40;font: 63 28pt \"Bw Stretch Medium\";border:2px solid rgb(92, 185, 95);}QPushButton:hover{background-color: rgba(92, 185, 95, 220);color:rgb(117, 234, 118);}QPushButton:pressed{background-color: rgba(92, 185, 95, 245);}");
     connect(Exit ,&QPushButton::clicked , this , &mainWindow::exitP );
     connect(StartNewGame , &QPushButton::clicked , this , &mainWindow::showGame);
+
 }
 
 void mainWindow::exitP()
@@ -33,6 +35,7 @@ void mainWindow::exitP()
 
 void mainWindow::showGame()
 {
-    game = new Game(width() , height());
+    game = new Game(width() , height() , 0);
     game->show();
+    this->hide();
 }

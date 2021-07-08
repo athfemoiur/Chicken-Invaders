@@ -2,6 +2,9 @@
     <qresource prefix="/Backgrounds">
         <file>Images/mainbackround.png</file>
         <file>Images/gamebackground.png</file>
+        <file>Images/LevelOneBack.png</file>
+        <file>Images/LevelTwoeBack.png</file>
+
     </qresource>
     <qresource prefix="/Icons">
         <file>Images/ship.png</file>

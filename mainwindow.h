@@ -5,18 +5,19 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include "Game.h"
+
 class mainWindow : public QMainWindow
 {
+
 public:
     mainWindow();
 
 private slots:
     void exitP();
     void showGame();
-private:
+public:
     QPushButton *LoadGame , *Exit , *StartNewGame , *Credits ;
     int wbtn , hbtn;
-    Game *game;
 };
 
 #endif // MAINWINDOW_H

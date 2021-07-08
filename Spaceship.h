@@ -12,9 +12,11 @@ public:
     int getLife() { return life; }
     int getMeat() { return meat; }
     void keyPressEvent(QKeyEvent * event);
-    void mouseMoveEvent(QMouseEvent *event);
     Bullet *bullet;
     void shoot();
+    void Animation();
+    QTimer *timer;
+    void stopAnimation();
 private:
     int life;
     int meat;

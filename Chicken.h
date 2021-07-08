@@ -26,7 +26,6 @@ private:
     int index;
     int row;
     int column;
-
 };
 
 #endif // CHICKEN_H
