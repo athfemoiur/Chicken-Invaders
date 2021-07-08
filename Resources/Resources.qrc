@@ -1,16 +1,15 @@
 <RCC>
     <qresource prefix="/Backgrounds">
         <file>Images/mainbackround.png</file>
-        <file>Images/gamebackground.png</file>
         <file>Images/LevelOneBack.png</file>
         <file>Images/LevelTwoeBack.png</file>
     </qresource>
     <qresource prefix="/Icons">
-        <file>Images/ship.png</file>
         <file>Images/bullet.png</file>
         <file>Images/cross.png</file>
         <file>Images/chicken3.png</file>
         <file>Images/chicken4.png</file>
         <file>Images/explosion_PNG15391.png</file>
+        <file>Images/ship.png</file>
     </qresource>
 </RCC>

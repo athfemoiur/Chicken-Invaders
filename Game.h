@@ -45,6 +45,7 @@ private:
     void setTimer();
     void checkLevel();
     void setscene();
+    void setBackground();
     void addShip();
     void addLifeBoard();
     void addScoreBoard();
