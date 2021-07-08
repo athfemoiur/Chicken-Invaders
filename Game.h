@@ -9,8 +9,12 @@
 #include "Chicken.h"
 class Game : public QGraphicsView
 {
+
+
 public:
-    Game(int , int , int,  QGraphicsView *parent = nullptr);
+
+    Game(int , int , int);
+
     int getWidth() const;
 
     int getHeight() const;
@@ -18,6 +22,7 @@ public:
 public:
 
     QGraphicsScene * scene;
+    QTimer *timer;
     SpaceShip *ship;
     QGraphicsTextItem * lifeboard;
     QGraphicsTextItem * scoreboard;
@@ -26,11 +31,17 @@ public:
     int getScore() const;
     int getChickenNum() const;
     int getLevel() const;
+    void addChicken();
+
+public slots:
+    void increaseTime();
+
 
 private:
 
     void mouseMoveEvent(QMouseEvent *event);
 private:
+    int time;
     int width , height;
     int chickenRow;
     int chikenColumn;

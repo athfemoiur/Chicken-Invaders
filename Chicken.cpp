@@ -8,7 +8,7 @@ Chicken::Chicken(int w, int h, int i, int r, int c) : width(w), height(h), index
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
     animation();
-    timer->start(40); // move every 100 ms
+    timer->start(150); // move every 100 ms
 
 }
 
@@ -29,7 +29,7 @@ void Chicken::moveDown()
     }
     int row = (index - 1) / column + 1;
     if(y() < height * 2 / 3 - 100 - (4 - row) * 100)
-        setPos(x(), y() + 72);;
+        setPos(x(), y() + 40);;
 }
 
 void Chicken::changeState()

@@ -1,8 +1,16 @@
 #include "Game.h"
 #include <QThread>
+#include "QDebug"
 
-Game::Game(int width , int height , int lev, QGraphicsView *parent): QGraphicsView(parent)
+Game::Game(int width , int height , int lev)
 {
+    timer = new QTimer;
+
+    connect(timer,SIGNAL(timeout()),this,SLOT(increaseTime()));
+    timer->start(1000);
+
+
+
     level = lev;
     //setStyleSheet()
     score=0;
@@ -17,9 +25,11 @@ Game::Game(int width , int height , int lev, QGraphicsView *parent): QGraphicsVi
     chickenNum = chickenRow * chikenColumn;
     setMouseTracking(true);
     setFocus();
+
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,width,height);
     setScene(scene);
+
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(width ,height);
@@ -27,18 +37,9 @@ Game::Game(int width , int height , int lev, QGraphicsView *parent): QGraphicsVi
     ship->setFlag(QGraphicsItem::ItemIsFocusable);
     ship->setFocus();
     scene->addItem(ship);
-    int startX =width/2-100*chikenColumn+40;
-    int startY = 35;
-    for (int i = 1;i <= chickenNum; i++) {
-        Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
-        chk->setPos(startX, startY);
-        scene->addItem(chk);
-        startX += 200;
-        if(i % chikenColumn ==0){
-            startY += 100;
-            startX = width/2-100*chikenColumn +40;
-        }
-     }
+
+
+
     lifeboard = new QGraphicsTextItem;
     lifeboard->setPlainText(QString("LIFE: ") + QString::number((ship->getLife())));
     lifeboard->setDefaultTextColor(Qt::red);
@@ -61,6 +62,30 @@ void Game::mouseMoveEvent(QMouseEvent *event)
 int Game::getLevel() const
 {
     return level;
+}
+
+void Game::increaseTime()
+{
+    time++;
+    if(time >= 4){
+        addChicken();
+    }
+}
+
+void Game::addChicken()
+{
+    int startX =width/2-100*chikenColumn+40;
+    int startY = 5;
+    for (int i = 1;i <= chickenNum; i++) {
+        Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
+        chk->setPos(startX, startY);
+        scene->addItem(chk);
+        startX += 200;
+        if(i % chikenColumn ==0){
+            startY += 100;
+            startX = width/2-100*chikenColumn +40;
+        }
+     }
 }
 
 int Game::getChickenNum() const
