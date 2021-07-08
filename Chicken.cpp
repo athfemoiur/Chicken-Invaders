@@ -14,19 +14,6 @@ Chicken::Chicken(int w, int h, int i, int r, int c) : width(w), height(h), index
 
 void Chicken::moveDown()
 {
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-    for (int i = 0, n = colliding_items.size(); i < n; ++i){
-        if (typeid(*(colliding_items[i])) == typeid(SpaceShip)){
-                game->ship->decreaseLife();
-                game->updateStats();
-                delete this;
-            // return (all code below refers to a non existint bullet)
-                if(game->ship->getLife()==0){
-                    game->close();
-                }
-                return;
-        }
-    }
     int row = (index - 1) / column + 1;
     if(y() < height * 2 / 3 - 100 - (4 - row) * 100)
         setPos(x(), y() + 40);;

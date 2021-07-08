@@ -4,7 +4,6 @@
         <file>Images/gamebackground.png</file>
         <file>Images/LevelOneBack.png</file>
         <file>Images/LevelTwoeBack.png</file>
-
     </qresource>
     <qresource prefix="/Icons">
         <file>Images/ship.png</file>
@@ -12,6 +11,6 @@
         <file>Images/cross.png</file>
         <file>Images/chicken3.png</file>
         <file>Images/chicken4.png</file>
-        <file>Images/121-1215915_explosion-clip-art-at-explode-icon.png</file>
+        <file>Images/explosion_PNG15391.png</file>
     </qresource>
 </RCC>

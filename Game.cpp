@@ -4,9 +4,12 @@
 
 Game::Game(int width , int height , int lev)
 {
+    QCursor cursor(Qt::BlankCursor);
+    setCursor(cursor);
+    isCollided = false;
     timer = new QTimer;
-
-    connect(timer,SIGNAL(timeout()),this,SLOT(increaseTime()));
+    time = 0;
+    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(increaseTime()));
     timer->start(1000);
 
 
@@ -54,9 +57,31 @@ Game::Game(int width , int height , int lev)
     scene->addItem(scoreboard);
 }
 
+Game::~Game()
+{
+    delete ship;
+}
+
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
-    ship->setPos(event->x()-35 , event->y()-35);
+    QList<QGraphicsItem *> colliding_items = ship->collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i){
+        if (typeid(*(colliding_items[i])) == typeid(Chicken)){
+                ship->decreaseLife();
+                time_collid = time;
+                isCollided = true;
+                ship->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
+                updateStats();
+                delete colliding_items[i];
+            // return (all code below refers to a non existint bullet)
+                if(ship->getLife()==0){
+                    close();
+                }
+                return;
+        }
+    }
+    if (!isCollided)
+        ship->setPos(event->x()-35 , event->y()-35);
 }
 
 int Game::getLevel() const
@@ -67,8 +92,12 @@ int Game::getLevel() const
 void Game::increaseTime()
 {
     time++;
-    if(time >= 4){
+    if(time == 4){
         addChicken();
+    }
+    if(time_collid + 2 == time){
+        ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
+        isCollided = false;
     }
 }
 

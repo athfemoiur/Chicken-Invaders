@@ -1,19 +1,20 @@
 #ifndef GAME_H
 #define GAME_H
 #include <QGraphicsView>
-#include <QWidget>
 #include <QGraphicsScene>
-#include <QPushButton>
 #include "Bullet.h"
 #include "Spaceship.h"
 #include "Chicken.h"
-class Game : public QGraphicsView
+class Game :   public QGraphicsView
 {
 
+    Q_OBJECT
 
 public:
 
     Game(int , int , int);
+
+    virtual ~Game();
 
     int getWidth() const;
 
@@ -42,12 +43,14 @@ private:
     void mouseMoveEvent(QMouseEvent *event);
 private:
     int time;
+    int time_collid;
     int width , height;
     int chickenRow;
     int chikenColumn;
     int score;
     int chickenNum;
     int level;
+    bool isCollided;
 
 };
 #endif // GAME_H
