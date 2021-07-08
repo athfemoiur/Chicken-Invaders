@@ -6,10 +6,15 @@
 #include <QPushButton>
 #include "Bullet.h"
 #include "Spaceship.h"
+#include "Chicken.h"
 class Game : public QGraphicsView
 {
 public:
     Game(int , int , QGraphicsView *parent = nullptr);
+    int getWidth() const;
+
+    int getHeight() const;
+
 private:
 
     QGraphicsScene * scene;
