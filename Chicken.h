@@ -14,13 +14,15 @@ public:
     QTimer *timer;
     QTimer *animationTimer;
     void animation();
+    void decreaseHealth();
+    int getHealth() const;
 
 public slots:
-    void moveDown();
-    void changeState();
+    virtual void moveDown();
+    virtual void changeState();
 
-private:
-    int width, height, counter = 0, index, row, column;
+protected:
+    int width, height, counter = 0, index, row, column, health;
 };
 
 #endif // CHICKEN_H

@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -11,7 +11,9 @@ CONFIG += c++11
 SOURCES += \
     Bullet.cpp \
     Chicken.cpp \
+    Controller.cpp \
     Game.cpp \
+    Hen.cpp \
     Spaceship.cpp \
     main.cpp \
     mainwindow.cpp
@@ -19,7 +21,9 @@ SOURCES += \
 HEADERS += \
     Bullet.h \
     Chicken.h \
+    Controller.h \
     Game.h \
+    Hen.h \
     Spaceship.h \
     mainwindow.h
 

@@ -1,6 +1,8 @@
 #include "Game.h"
 #include <QThread>
 #include "QDebug"
+#include "QMediaPlayer"
+#include "Hen.h"
 
 Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) ,isCollided(false)
 {
@@ -11,13 +13,24 @@ Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4
     setFocus();
     setBackground();
     setscene();
+//    auto musicPlayer = new QMediaPlayer;
+//    musicPlayer->setMedia(QUrl("qrc:/Sounds/Sounds/02-01. Main Theme.mp3"));
+//    musicPlayer->setVolume(50);
+//    musicPlayer->play();
     checkLevel();
     chickenNum = chickenRow * chikenColumn;
+
 }
 
 Game::~Game()
 {
+    // destructor must not delete ptr
+
+//    delete scene;
     delete ship;
+//    delete scoreboard;
+//    delete lifeboard;
+//    delete timer;
 
 }
 
@@ -45,6 +58,11 @@ int Game::getScore() const
 int Game::getChickenNum() const
 {
     return chickenNum;
+}
+
+void Game::setChickenNum(int num)
+{
+    chickenNum = num;
 }
 
 
@@ -113,6 +131,7 @@ void Game::shipColision()
                 ship->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
                 updateStats();
                 delete colliding_items[i];
+                setChickenNum(getChickenNum() - 1);
             // return (all code below refers to a non existint bullet)
                 if(ship->getLife()==0){
                     close();
@@ -185,5 +204,3 @@ void Game::addChicken()
         }
     }
 }
-
-

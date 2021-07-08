@@ -5,23 +5,31 @@
 #include "Bullet.h"
 #include "Spaceship.h"
 #include "Chicken.h"
+#include <QVector>
+
+
+
 class Game :   public QGraphicsView
 {
 
     Q_OBJECT
+    friend class Controller;
 
 public:
 
     Game(int , int , int);
     ~Game();
 
+
     int getWidth() const;
     int getHeight() const;
     int getScore() const;
     int getChickenNum() const;
+    void setChickenNum(int);
     int getLevel() const;
     void increasePoint();
     void updateStats();
+
 
 private:
 
@@ -38,8 +46,9 @@ public slots:
 
 private:
 
+
+
     void mouseMoveEvent(QMouseEvent *event);
-    void addChicken();
     void shipColision();
     void setcursor();
     void setTimer();
@@ -49,6 +58,7 @@ private:
     void addShip();
     void addLifeBoard();
     void addScoreBoard();
+    void addChicken();
 private:
     int gTime ,time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level;
     bool isCollided;

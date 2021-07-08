@@ -1,6 +1,7 @@
 #include "Bullet.h"
 #include "Game.h"
 #include "Chicken.h"
+
 extern Game * game;
 
 Bullet::Bullet()
@@ -23,16 +24,22 @@ void Bullet::move()
               game->updateStats();
 
               delete this;
-              delete colliding_items[i];
 
-              if(game->getScore() == game->getChickenNum()*5 && game->getLevel() == 0){
+              Chicken *temp = static_cast<Chicken *>(colliding_items[i]);
+              temp->decreaseHealth();
+              if(temp->getHealth() == 0){
+                  game->setChickenNum(game->getChickenNum() - 1);
+                  delete colliding_items[i];
+              }
+
+              if(game->getChickenNum() == 0 && game->getLevel() == 0){
                   int w= game->getWidth();
                   int h = game->getHeight();
                   delete game;
                   game = new Game(w , h , 1 );
                   game->show();
 
-              }else if(game->getScore() == game->getChickenNum()*5 && game->getLevel()==1){
+              }else if(game->getChickenNum() == 0 && game->getLevel()==1){
                   game->close();
               }
             // return (all code below refers to a non existint bullet)
