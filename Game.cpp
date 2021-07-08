@@ -5,6 +5,9 @@ Game::Game(int width , int height , QGraphicsView *parent): QGraphicsView(parent
     setBackgroundBrush(QPixmap(":/Backgrounds/Images/gamebackground.png"));
     this->width = width;
     this->height = height;
+    chickenRow = 4;
+    chikenColumn = 5;
+    chickenNum = chickenRow * chikenColumn;
     setMouseTracking(true);
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,width,height);
@@ -17,13 +20,17 @@ Game::Game(int width , int height , QGraphicsView *parent): QGraphicsView(parent
     ship->setFocus();
     scene->addItem(ship);
     int startX = 600;
-    for (int i = 0;i < 5; i++) {
-        Chicken * chk = new Chicken(width, height);
-        chk->setPos(startX, 35);
+    int startY = 35;
+    for (int i = 1;i <= chickenNum; i++) {
+        Chicken * chk = new Chicken(width, height, i, chickenRow, chikenColumn);
+        chk->setPos(startX, startY);
         scene->addItem(chk);
         startX += 200;
+        if(i % chikenColumn ==0){
+            startY += 100;
+            startX = 600;
     }
-
+}
 }
 
 void Game::mouseMoveEvent(QMouseEvent *event)

@@ -15,7 +15,7 @@ public:
 
     int getHeight() const;
 
-private:
+public:
 
     QGraphicsScene * scene;
     SpaceShip *ship;
@@ -24,6 +24,9 @@ private:
     void mouseMoveEvent(QMouseEvent *event);
 private:
     int width , height;
+    int chickenRow;
+    int chikenColumn;
+    int chickenNum;
 };
 
 #endif // GAME_H

@@ -3,13 +3,14 @@
 #include "QGraphicsPixmapItem"
 #include "QObject"
 #include "QTimer"
+#include "Game.h"
 class Chicken :public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 
 public:
 
-    Chicken(int, int);
+    Chicken(int, int, int, int, int);
     QTimer *timer;
     QTimer *animationTimer;
     void animation();
@@ -22,6 +23,9 @@ private:
     int width;
     int height;
     int counter = 0;
+    int index;
+    int row;
+    int column;
 
 };
 
