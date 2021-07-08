@@ -1,7 +1,6 @@
 #include "Bullet.h"
 #include "Game.h"
 #include "Chicken.h"
-#include "QThread"
 extern Game * game;
 
 Bullet::Bullet()

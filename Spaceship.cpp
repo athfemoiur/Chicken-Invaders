@@ -3,15 +3,11 @@
 #include <QDebug>
 extern Game * game;
 
-SpaceShip::SpaceShip()
+SpaceShip::SpaceShip() : life(3) , meat(0) , shootMode(0)
 {
-    setFocus();
-
+    setFocus(); // for focus of keyevents (space)
     setPixmap(QPixmap(":/Icons/Images/ship.png"));
     setPos(600 , 600);
-    life = 3;
-    meat = 0;
-    shootMode = 0;
 }
 
 void SpaceShip::increaseLife()
@@ -26,23 +22,23 @@ void SpaceShip::decreaseLife()
 
 void SpaceShip::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Left)
-    {
-        setPos(x()-10,y());
-    }
-    else if (event->key() == Qt::Key_Right)
-    {
-        setPos(x()+10,y());
-    }
-    else if(event->key() == Qt::Key_Up)
-    {
-        setPos(x() , y()-10);
-    }
-    else if(event->key() == Qt::Key_Down)
-    {
-        setPos(x() , y()+10);
-    }
-    else if (event->key() == Qt::Key_Space)
+//    if(event->key() == Qt::Key_Left)
+//    {
+//        setPos(x()-10,y());
+//    }
+//    else if (event->key() == Qt::Key_Right)
+//    {
+//        setPos(x()+10,y());
+//    }
+//    else if(event->key() == Qt::Key_Up)
+//    {
+//        setPos(x() , y()-10);
+//    }
+//    else if(event->key() == Qt::Key_Down)
+//    {
+//        setPos(x() , y()+10);
+//    }
+   if (event->key() == Qt::Key_Space)
     {
         shoot();
     }
@@ -68,15 +64,4 @@ void SpaceShip::shoot()
         scene()->addItem(bullet);
 
     }
-}
-
-void SpaceShip::Animation()
-{
-    timer = new QTimer();
-
-}
-
-void SpaceShip::stopAnimation()
-{
-    timer->stop();
 }

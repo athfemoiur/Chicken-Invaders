@@ -20,12 +20,7 @@ public slots:
     void changeState();
 
 private:
-    int width;
-    int height;
-    int counter = 0;
-    int index;
-    int row;
-    int column;
+    int width, height, counter = 0, index, row, column;
 };
 
 #endif // CHICKEN_H

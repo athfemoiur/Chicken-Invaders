@@ -2,6 +2,7 @@
 extern Game *game;
 mainWindow::mainWindow()
 {
+    // hardCode for design
     wbtn = 700;
     hbtn = 80;
     setWindowFlags(Qt::Window|Qt::FramelessWindowHint);

@@ -2,59 +2,16 @@
 #include <QThread>
 #include "QDebug"
 
-Game::Game(int width , int height , int lev)
+Game::Game(int w , int h , int lev) : width(w),height(h), chickenRow(4), score(0) ,level(lev) ,isCollided(false)
 {
-    QCursor cursor(Qt::BlankCursor);
-    setCursor(cursor);
-    isCollided = false;
-    timer = new QTimer;
-    time = 0;
-    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(increaseTime()));
-    timer->start(1000);
-
-
-
-    level = lev;
-    //setStyleSheet()
-    score=0;
-    setBackgroundBrush(QPixmap(":/Backgrounds/Images/gamebackground.png"));
-    this->width = width;
-    this->height = height;
-    chickenRow = 4;
-    if(level == 0)
-        chikenColumn = 5;
-    else
-        chikenColumn = 9;
-    chickenNum = chickenRow * chikenColumn;
     setMouseTracking(true);
     setFocus();
-
-    scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,width,height);
-    setScene(scene);
-
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(width ,height);
-    ship = new SpaceShip();
-    ship->setFlag(QGraphicsItem::ItemIsFocusable);
-    ship->setFocus();
-    scene->addItem(ship);
-
-
-
-    lifeboard = new QGraphicsTextItem;
-    lifeboard->setPlainText(QString("LIFE: ") + QString::number((ship->getLife())));
-    lifeboard->setDefaultTextColor(Qt::red);
-    lifeboard->setFont(QFont("times",16));
-    lifeboard->setPos(0,680);
-    scene->addItem(lifeboard);
-    scoreboard = new QGraphicsTextItem;
-    scoreboard->setPlainText(QString("SCORE: ") + QString::number(score));
-    scoreboard->setDefaultTextColor(Qt::blue);
-    scoreboard->setFont(QFont("times",16));
-    scoreboard->setPos(1150,680);
-    scene->addItem(scoreboard);
+    setBackgroundBrush(QPixmap(":/Backgrounds/Images/gamebackground.png"));
+    setcursor();
+    setTimer();
+    checkLevel();
+    chickenNum = chickenRow * chikenColumn;  
+    setscene();
 }
 
 Game::~Game()
@@ -64,11 +21,51 @@ Game::~Game()
 
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
+    shipColision();
+    if (!isCollided)
+        ship->setPos(event->x()-35 , event->y()-35);
+}
+
+int Game::getLevel() const
+{
+    return level;
+}
+
+void Game::schedule()
+{
+    gTime++;
+    if(gTime == 4){
+        addChicken();
+    }
+    if(time_collid + 2 == gTime){
+        ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
+        isCollided = false;
+    }
+}
+
+void Game::addChicken()
+{
+    int startX =width/2-100*chikenColumn+40;
+    int startY = 0;
+    for (int i = 1;i <= chickenNum; i++) {
+        Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
+        chk->setPos(startX, startY);
+        scene->addItem(chk);
+        startX += 200;
+        if(i % chikenColumn ==0){
+            startY += 100;
+            startX = width/2-100*chikenColumn +40;
+        }
+    }
+}
+
+void Game::shipColision()
+{
     QList<QGraphicsItem *> colliding_items = ship->collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if (typeid(*(colliding_items[i])) == typeid(Chicken)){
                 ship->decreaseLife();
-                time_collid = time;
+                time_collid = gTime;
                 isCollided = true;
                 ship->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
                 updateStats();
@@ -80,41 +77,71 @@ void Game::mouseMoveEvent(QMouseEvent *event)
                 return;
         }
     }
-    if (!isCollided)
-        ship->setPos(event->x()-35 , event->y()-35);
 }
 
-int Game::getLevel() const
+void Game::setcursor()
 {
-    return level;
+    QCursor cursor(Qt::BlankCursor);
+    setCursor(cursor);
 }
 
-void Game::increaseTime()
+void Game::setTimer()
 {
-    time++;
-    if(time == 4){
-        addChicken();
+    timer = new QTimer;
+    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(schedule()));
+    timer->start(1000);
+
+}
+
+void Game::checkLevel()
+{
+    if(level == 0) {
+        chikenColumn = 5;
     }
-    if(time_collid + 2 == time){
-        ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
-        isCollided = false;
+    else {
+        chikenColumn = 9;
     }
 }
 
-void Game::addChicken()
+void Game::setscene()
 {
-    int startX =width/2-100*chikenColumn+40;
-    int startY = 5;
-    for (int i = 1;i <= chickenNum; i++) {
-        Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
-        chk->setPos(startX, startY);
-        scene->addItem(chk);
-        startX += 200;
-        if(i % chikenColumn ==0){
-            startY += 100;
-            startX = width/2-100*chikenColumn +40;
-        }
-     }
+    scene = new QGraphicsScene();
+    scene->setSceneRect(0,0,width,height);
+    setScene(scene);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setFixedSize(width ,height);
+    addShip();
+    addScoreBoard();
+    addLifeBoard();
+    scene->addItem(ship);
+    scene->addItem(lifeboard);
+    scene->addItem(scoreboard);
+}
+
+void Game::addShip()
+{
+    ship = new SpaceShip();
+    ship->setFlag(QGraphicsItem::ItemIsFocusable);
+    ship->setFocus();
+}
+
+void Game::addLifeBoard()
+{
+    lifeboard = new QGraphicsTextItem;
+    lifeboard->setPlainText(QString("LIFE: ") + QString::number((ship->getLife())));
+    lifeboard->setDefaultTextColor(Qt::red);
+    lifeboard->setFont(QFont("times",16));
+    lifeboard->setPos(0,680);
+}
+
+void Game::addScoreBoard()
+{
+    scoreboard = new QGraphicsTextItem;
+    scoreboard->setPlainText(QString("SCORE: ") + QString::number(score));
+    scoreboard->setDefaultTextColor(Qt::blue);
+    scoreboard->setFont(QFont("times",16));
+    scoreboard->setPos(1150,680);
 }
 
 int Game::getChickenNum() const
@@ -126,6 +153,7 @@ int Game::getHeight() const
 {
     return height;
 }
+
 void Game::updateStats(){
       lifeboard->setPlainText(QString("LIFE: ") + QString::number((ship->getLife())));
       scoreboard->setPlainText(QString("SCORE: ") + QString::number(score));
@@ -135,6 +163,7 @@ int Game::getScore() const
 {
     return score;
 }
+
 void Game::increasePoint()
 {
 

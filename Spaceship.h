@@ -11,16 +11,15 @@ public:
     void decreaseLife();
     int getLife() { return life; }
     int getMeat() { return meat; }
-    void keyPressEvent(QKeyEvent * event);
-    Bullet *bullet;
-    void shoot();
-    void Animation();
-    QTimer *timer;
-    void stopAnimation();
 private:
-    int life;
-    int meat;
-    int shootMode;
+    void keyPressEvent(QKeyEvent * event); // for Handlening Movement
+private:
+    Bullet *bullet;
+    QTimer *timer;
+private:
+    void shoot();
+private:
+    int life, meat, shootMode;
 
 };
 

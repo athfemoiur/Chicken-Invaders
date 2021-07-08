@@ -13,43 +13,43 @@ class Game :   public QGraphicsView
 public:
 
     Game(int , int , int);
-
-    virtual ~Game();
+    ~Game();
 
     int getWidth() const;
-
     int getHeight() const;
+    int getScore() const;
+    int getChickenNum() const;
+    int getLevel() const;
+    void increasePoint();
+    void updateStats();
 
-public:
+private:
 
     QGraphicsScene * scene;
     QTimer *timer;
     SpaceShip *ship;
     QGraphicsTextItem * lifeboard;
     QGraphicsTextItem * scoreboard;
-    void increasePoint();
-    void updateStats();
-    int getScore() const;
-    int getChickenNum() const;
-    int getLevel() const;
-    void addChicken();
+
 
 public slots:
-    void increaseTime();
 
+    void schedule();
 
 private:
 
     void mouseMoveEvent(QMouseEvent *event);
+    void addChicken();
+    void shipColision();
+    void setcursor();
+    void setTimer();
+    void checkLevel();
+    void setscene();
+    void addShip();
+    void addLifeBoard();
+    void addScoreBoard();
 private:
-    int time;
-    int time_collid;
-    int width , height;
-    int chickenRow;
-    int chikenColumn;
-    int score;
-    int chickenNum;
-    int level;
+    int gTime ,time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level;
     bool isCollided;
 
 };

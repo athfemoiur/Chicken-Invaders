@@ -9,14 +9,13 @@ Chicken::Chicken(int w, int h, int i, int r, int c) : width(w), height(h), index
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
     animation();
     timer->start(150); // move every 100 ms
-
 }
 
 void Chicken::moveDown()
 {
     int row = (index - 1) / column + 1;
     if(y() < height * 2 / 3 - 100 - (4 - row) * 100)
-        setPos(x(), y() + 40);;
+        setPos(x(), y() + 5);
 }
 
 void Chicken::changeState()
@@ -31,7 +30,7 @@ void Chicken::animation()
 {
     animationTimer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(changeState()));
-    animationTimer->start(2500);
+    animationTimer->start(150);
 }
 
 
