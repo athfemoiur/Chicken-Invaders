@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/Backgrounds">
         <file>Images/mainbackround.png</file>
-        <file>Images/LevelOneBack.png</file>
         <file>Images/LevelTwoeBack.png</file>
+        <file>Images/LevelOneBack.png</file>
     </qresource>
     <qresource prefix="/Icons">
         <file>Images/bullet.png</file>

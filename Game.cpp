@@ -4,6 +4,7 @@
 
 Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) ,isCollided(false)
 {
+    setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
     setcursor();
     setTimer();
     setMouseTracking(true);
@@ -17,6 +18,7 @@ Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4
 Game::~Game()
 {
     delete ship;
+
 }
 
 
@@ -131,8 +133,8 @@ void Game::checkLevel()
 }
 
 void Game::updateStats(){
-      lifeboard->setPlainText(QString("LIFE: ") + QString::number((ship->getLife())));
-      scoreboard->setPlainText(QString("SCORE: ") + QString::number(score));
+      lifeboard->setPlainText( QString::number((ship->getLife())));
+      scoreboard->setPlainText(QString::number(score));
 }
 
 void Game::increasePoint()
@@ -153,19 +155,19 @@ void Game::addShip()
 void Game::addLifeBoard()
 {
     lifeboard = new QGraphicsTextItem;
-    lifeboard->setPlainText(QString("LIFE: ") + QString::number((ship->getLife())));
-    lifeboard->setDefaultTextColor(Qt::red);
-    lifeboard->setFont(QFont("times",16));
-    lifeboard->setPos(0,680);
+    lifeboard->setPlainText( QString::number((ship->getLife())));
+    lifeboard->setDefaultTextColor(Qt::white);
+    lifeboard->setFont(QFont("Bw Stretch Medium",30));
+    lifeboard->setPos(90,970);
 }
 
 void Game::addScoreBoard()
 {
     scoreboard = new QGraphicsTextItem;
-    scoreboard->setPlainText(QString("SCORE: ") + QString::number(score));
-    scoreboard->setDefaultTextColor(Qt::blue);
-    scoreboard->setFont(QFont("times",16));
-    scoreboard->setPos(1150,680);
+    scoreboard->setPlainText(QString::number(score));
+    scoreboard->setDefaultTextColor(Qt::white);
+    scoreboard->setFont(QFont("Bw Stretch Medium",36));
+    scoreboard->setPos(130,5);
 }
 
 void Game::addChicken()
