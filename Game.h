@@ -30,7 +30,7 @@ public:
     void increasePoint(int);
     void updateStats();
     int gTime;
-    bool isFinished;
+    bool isLevFinished;
 
 private:
 
@@ -39,7 +39,7 @@ private:
     SpaceShip *ship;
     QGraphicsTextItem * lifeboard;
     QGraphicsTextItem * scoreboard;
-
+    QGraphicsTextItem * resboard;
 
 public slots:
 
@@ -51,15 +51,18 @@ private:
 
     void mouseMoveEvent(QMouseEvent *event);
     void shipColision();
-    void setcursor();
-    void setTimer();
     void checkLevel();
+    void setcursor();
+    void setTimer();    
     void setscene();
     void setBackground();
+    void setNextLevel();
     void addShip();
     void addLifeBoard();
     void addScoreBoard();
+    void addResBoard();
     void addChicken();
+
 private:
     int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level;
     bool isCollided;

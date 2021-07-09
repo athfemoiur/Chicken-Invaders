@@ -1,4 +1,4 @@
-#include "Game.h"
+   #include "Game.h"
 #include <QThread>
 #include "QDebug"
 #include "QMediaPlayer"
@@ -8,7 +8,7 @@ extern Game *game;
 
 Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) ,isCollided(false)
 {
-    isFinished = false;
+    isLevFinished = false;
     setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
     setcursor();
     setTimer();
@@ -21,7 +21,7 @@ Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4
 //    musicPlayer->setVolume(50);
 //    musicPlayer->play();
     checkLevel();
-
+    resboard->hide();
 
 }
 
@@ -101,9 +101,11 @@ void Game::setscene()
     addShip();
     addScoreBoard();
     addLifeBoard();
+    addResBoard();
     scene->addItem(ship);
     scene->addItem(lifeboard);
     scene->addItem(scoreboard);
+    scene->addItem(resboard);
 }
 
 void Game::setBackground()
@@ -111,22 +113,35 @@ void Game::setBackground()
     setBackgroundBrush(QPixmap(":/Backgrounds/Images/LevelOneBack.png"));
 }
 
+void Game::setNextLevel()
+{
+     isLevFinished= false;
+    gTime= 0;
+    ++level;
+    checkLevel();
+    setscene();
+
+}
+
 void Game::schedule()
 {
     gTime++;
     if(gTime == 4){
-        addChicken();
+        if(level<2){
+            resboard->hide();
+            addChicken();
+        }
+        else if (level>=2 && level <4){
+
+        }
     }
     if(time_collid + 2 == gTime){
         ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
         isCollided = false;
     }
-    if(isFinished){
-        isFinished = false;
-        gTime = 0;
-        level = 1;
-        checkLevel();
-        setscene();
+    if(isLevFinished){
+        setNextLevel();
+        resboard->show();
     }
 }
 
@@ -156,7 +171,7 @@ void Game::checkLevel()
     if(level == 0) {
         chikenColumn = 5;
     }
-    else {
+    else if (level ==1) {
         chikenColumn = 9;
     }
     chickenNum = chickenRow * chikenColumn;
@@ -197,6 +212,15 @@ void Game::addScoreBoard()
     scoreboard->setDefaultTextColor(Qt::white);
     scoreboard->setFont(QFont("Bw Stretch Medium",36));
     scoreboard->setPos(130,5);
+}
+
+void Game::addResBoard()
+{
+    resboard = new QGraphicsTextItem;
+    resboard->setPlainText(QString("You Won Level : ") + QString::number(level)+QString("!"));
+    resboard->setDefaultTextColor(Qt::white);
+    resboard->setFont(QFont("Bw Stretch Medium",72));
+    resboard->setPos(width/2-300,height/2-60);
 }
 
 void Game::addChicken()

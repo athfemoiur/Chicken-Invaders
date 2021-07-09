@@ -34,7 +34,7 @@ void Bullet::move()
 
               if(game->getChickenNum() == 0 && game->getLevel() == 0){
 
-                  game->isFinished = true;
+                  game->isLevFinished = true;
 
               }else if(game->getChickenNum() == 0 && game->getLevel()==1){
                   game->close();
