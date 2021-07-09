@@ -72,7 +72,6 @@ void Game::setChickenNum(int num)
 
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
-    ship->collision();
     if (!isCollided)
         ship->setPos(event->x()-35 , event->y()-35);
 }
@@ -152,7 +151,7 @@ void Game::schedule()
 
 void Game::resetLevel()
 {
-    isStarted = true;
+    isStarted = false;
     ship->setPos(600 ,600);
     gTime= 0;
     level=0;

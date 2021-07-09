@@ -9,6 +9,10 @@ SpaceShip::SpaceShip() : life(3) , meat(0) , shootMode(0)
     setFocus(); // for focus of keyevents (space)
     setPixmap(QPixmap(":/Icons/Images/ship.png"));
     setPos(600 , 600);
+    timer =new QTimer;
+    connect(timer,SIGNAL(timeout()),this,SLOT(collision())); // connect the timer to the move function
+    timer->start(10); // move every 40 ms
+
 }
 
 void SpaceShip::increaseLife()

@@ -3,8 +3,9 @@
 #include <QGraphicsPixmapItem>
 #include <QKeyEvent>
 #include "Bullet.h"
-class SpaceShip : public QGraphicsPixmapItem
+class SpaceShip :public QObject , public QGraphicsPixmapItem
 {
+    Q_OBJECT
 public:
     SpaceShip();
     void increaseLife();
@@ -13,6 +14,7 @@ public:
     void resetMeat();
     int getLife() { return life; }
     int getMeat() { return meat; }
+public slots:
     void collision();
 private:
     void keyPressEvent(QKeyEvent * event);// for Handlening Movement
