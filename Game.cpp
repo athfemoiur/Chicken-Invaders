@@ -292,24 +292,48 @@ void Game::addChickenAndHen()
 
     int startX =width/2-100*chikenColumn+250;
     int startY = 0;
-    for(int i=1; i<=chickenNum; i++){
-        if(i%2 == 0){
-            Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
-            chk->setPos(startX, startY);
-            scene->addItem(chk);
-            startX += 160;
-        }
-        else{
-            Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn );
-            Hen::hens.append(hen);
-            hen->setPos(startX, startY);
-            scene->addItem(hen);
-            startX += 160;
-        }
+    if(level == 2){
+        for(int i=1; i<=chickenNum; i++){
 
-        if(i % chikenColumn ==0){
-            startY += 100;
-            startX = width/2-100*chikenColumn +250;
-       }
+            if(i%2 == 0){
+               Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
+               chk->setPos(startX, startY);
+               scene->addItem(chk);
+               startX += 160;
+           }
+           else{
+               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn );
+               Hen::hens.append(hen);
+               hen->setPos(startX, startY);
+               scene->addItem(hen);
+               startX += 160;
+           }
+
+           if(i % chikenColumn ==0){
+               startY += 100;
+               startX = width/2-100*chikenColumn +250;
+          }
+      }
+    }else if (level == 3) {
+        for(int i=1; i<=chickenNum; i++){
+
+            if(i%4 == 1 || i%4 ==2){
+               Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
+               chk->setPos(startX, startY);
+               scene->addItem(chk);
+               startX += 160;
+           }
+           else{
+               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn );
+               Hen::hens.append(hen);
+               hen->setPos(startX, startY);
+               scene->addItem(hen);
+               startX += 160;
+           }
+           if(i % chikenColumn ==0){
+               startY += 100;
+               startX = width/2-100*chikenColumn +250;
+          }
+      }
     }
 }
