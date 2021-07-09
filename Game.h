@@ -41,7 +41,7 @@ private:
     QGraphicsTextItem * lifeboard;
     QGraphicsTextItem * scoreboard;
     QGraphicsTextItem * resboard;
-
+    QGraphicsTextItem * meatboard;
 public slots:
 
     void schedule();
@@ -62,6 +62,7 @@ private:
     void addLifeBoard();
     void addScoreBoard();
     void addResBoard();
+    void addMeatBoard();
     void addChicken();
     void addChickenAndHen();
 private:

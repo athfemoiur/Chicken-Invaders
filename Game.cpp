@@ -102,10 +102,14 @@ void Game::setscene()
     addScoreBoard();
     addLifeBoard();
     addResBoard();
+    addMeatBoard();
     scene->addItem(ship);
     scene->addItem(lifeboard);
     scene->addItem(scoreboard);
     scene->addItem(resboard);
+    if(level>=2){
+        scene->addItem(meatboard);
+    }
 }
 
 void Game::setBackground()
@@ -185,6 +189,9 @@ void Game::updateStats()
 {
       lifeboard->setPlainText( QString::number((ship->getLife())));
       scoreboard->setPlainText(QString::number(score));
+      if(level>=2){
+        meatboard->setPlainText(QString::number(ship->getMeat()));
+      }
 }
 
 void Game::increasePoint(int p)
@@ -228,6 +235,15 @@ void Game::addResBoard()
     resboard->setDefaultTextColor(Qt::white);
     resboard->setFont(QFont("Bw Stretch Medium",72));
     resboard->setPos(width/2-300,height/2-60);
+}
+
+void Game::addMeatBoard()
+{
+    meatboard = new QGraphicsTextItem;
+    meatboard->setPlainText(QString::number(ship->getMeat()));
+    meatboard->setDefaultTextColor(Qt::white);
+    meatboard->setFont(QFont("Bw Stretch Medium",30));
+    meatboard->setPos(180,970);
 }
 
 void Game::addChicken()

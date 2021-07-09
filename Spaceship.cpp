@@ -83,6 +83,7 @@ void SpaceShip::collision()
         }
         else if(typeid(*(colliding_items[i])) == typeid(Meat)){
             increaseMeat();
+            game->updateStats();
             delete colliding_items[i];
         }
 
