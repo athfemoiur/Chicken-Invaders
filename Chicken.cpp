@@ -8,8 +8,9 @@ Chicken::Chicken(int w, int h, int i, int r, int c) : width(w), height(h), index
     setPixmap(QPixmap(":/Icons/Images/chicken3.png")); // set icon for bullet object
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
+    timer->start(150);
     animation();
-    timer->start(150); // move every 100 ms
+     // move every 100 ms
 }
 
 void Chicken::moveDown()

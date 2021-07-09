@@ -4,8 +4,11 @@
 #include "QMediaPlayer"
 #include "Hen.h"
 
+extern Game *game;
+
 Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) ,isCollided(false)
 {
+    isFinished = false;
     setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
     setcursor();
     setTimer();
@@ -18,7 +21,7 @@ Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4
 //    musicPlayer->setVolume(50);
 //    musicPlayer->play();
     checkLevel();
-    chickenNum = chickenRow * chikenColumn;
+
 
 }
 
@@ -27,7 +30,7 @@ Game::~Game()
     // destructor must not delete ptr
 
 //    delete scene;
-    delete ship;
+//    delete ship;
 //    delete scoreboard;
 //    delete lifeboard;
 //    delete timer;
@@ -118,6 +121,13 @@ void Game::schedule()
         ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
         isCollided = false;
     }
+    if(isFinished){
+        isFinished = false;
+        gTime = 0;
+        level = 1;
+        checkLevel();
+        setscene();
+    }
 }
 
 void Game::shipColision()
@@ -132,7 +142,7 @@ void Game::shipColision()
                 updateStats();
                 delete colliding_items[i];
                 setChickenNum(getChickenNum() - 1);
-            // return (all code below refers to a non existint bullet)
+
                 if(ship->getLife()==0){
                     close();
                 }
@@ -149,18 +159,18 @@ void Game::checkLevel()
     else {
         chikenColumn = 9;
     }
+    chickenNum = chickenRow * chikenColumn;
 }
 
-void Game::updateStats(){
+void Game::updateStats()
+{
       lifeboard->setPlainText( QString::number((ship->getLife())));
       scoreboard->setPlainText(QString::number(score));
 }
 
-void Game::increasePoint()
+void Game::increasePoint(int p)
 {
-
-    score+=5;
-
+    score += p;
 }
 
 

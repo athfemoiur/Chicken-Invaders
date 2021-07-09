@@ -27,9 +27,10 @@ public:
     int getChickenNum() const;
     void setChickenNum(int);
     int getLevel() const;
-    void increasePoint();
+    void increasePoint(int);
     void updateStats();
-
+    int gTime;
+    bool isFinished;
 
 private:
 
@@ -60,7 +61,7 @@ private:
     void addScoreBoard();
     void addChicken();
 private:
-    int gTime ,time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level;
+    int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level;
     bool isCollided;
 
 };

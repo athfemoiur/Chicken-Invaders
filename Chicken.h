@@ -13,7 +13,7 @@ public:
     Chicken(int, int, int, int, int);
     QTimer *timer;
     QTimer *animationTimer;
-    void animation();
+    virtual void animation();
     void decreaseHealth();
     int getHealth() const;
 

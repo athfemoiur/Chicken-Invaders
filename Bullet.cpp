@@ -20,7 +20,7 @@ void Bullet::move()
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if (typeid((*colliding_items[i])) == typeid(Chicken)){
 
-              game->increasePoint();
+              game->increasePoint(5);
               game->updateStats();
 
               delete this;
@@ -33,11 +33,8 @@ void Bullet::move()
               }
 
               if(game->getChickenNum() == 0 && game->getLevel() == 0){
-                  int w= game->getWidth();
-                  int h = game->getHeight();
-                  delete game;
-                  game = new Game(w , h , 1 );
-                  game->show();
+
+                  game->isFinished = true;
 
               }else if(game->getChickenNum() == 0 && game->getLevel()==1){
                   game->close();
