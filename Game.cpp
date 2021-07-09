@@ -1,8 +1,9 @@
-   #include "Game.h"
+#include "Game.h"
 #include <QThread>
 #include "QDebug"
 #include "QMediaPlayer"
 #include "Hen.h"
+#include "Egg.h"
 
 extern Game *game;
 
@@ -137,6 +138,12 @@ void Game::setNextLevel()
 void Game::schedule()
 {
     gTime++;
+    for (int i = 0; i < Egg::eggs.size(); i++) {
+        if(Egg::eggs[i]->isHited && Egg::eggs[i]->hitTime + 1 == gTime){
+            delete Egg::eggs[i];
+            Egg::eggs.removeAt(i);
+        }
+    }
     if(gTime == 4){
         isStarted = true;
         if(level<2){
@@ -146,6 +153,11 @@ void Game::schedule()
         else if (level>=2 && level <4){
              resboard->hide();
              addChickenAndHen();
+        }
+    }
+    if(gTime % 5 == 0 && level >=2){
+        for (int i = 0; i < 4; i++) {
+            Hen::hens[i]->dropEgg();
         }
     }
     if(time_collid + 1 == gTime){
@@ -234,7 +246,7 @@ void Game::addResBoard()
     resboard->setPlainText(QString("You Won Level : ") + QString::number(level)+QString("!"));
     resboard->setDefaultTextColor(Qt::white);
     resboard->setFont(QFont("Bw Stretch Medium",72));
-    resboard->setPos(width/2-300,height/2-60);
+    resboard->setPos(width/2-280,height/2-60);
 }
 
 void Game::addMeatBoard()
@@ -243,7 +255,7 @@ void Game::addMeatBoard()
     meatboard->setPlainText(QString::number(ship->getMeat()));
     meatboard->setDefaultTextColor(Qt::white);
     meatboard->setFont(QFont("Bw Stretch Medium",30));
-    meatboard->setPos(165,970);
+    meatboard->setPos(160,970);
 }
 
 void Game::addChicken()
@@ -276,6 +288,7 @@ void Game::addChickenAndHen()
         }
         else{
             Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn );
+            Hen::hens.append(hen);
             hen->setPos(startX, startY);
             scene->addItem(hen);
             startX += 160;

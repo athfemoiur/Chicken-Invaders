@@ -12,6 +12,8 @@ public:
 public:
     void animation() override;
     void dropMeat();
+    void dropEgg();
+    static QVector<Hen *> hens;
 
 public slots:
     void changeState() override;

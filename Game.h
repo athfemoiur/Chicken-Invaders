@@ -5,7 +5,8 @@
 #include "Bullet.h"
 #include "Spaceship.h"
 #include "Chicken.h"
-#include <QVector>
+#include <Controller.h>
+
 
 
 
@@ -32,6 +33,7 @@ public:
     void updateStats();
     int gTime;
     bool isLevFinished;
+    Controller *cnt;
 
 private:
 
@@ -42,6 +44,7 @@ private:
     QGraphicsTextItem * scoreboard;
     QGraphicsTextItem * resboard;
     QGraphicsTextItem * meatboard;
+
 public slots:
 
     void schedule();

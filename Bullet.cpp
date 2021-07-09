@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Chicken.h"
 #include "Hen.h"
+
 extern Game * game;
 
 Bullet::Bullet()

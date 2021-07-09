@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Meat.h"
 #include <QDebug>
+#include "Egg.h"
 extern Game * game;
 
 SpaceShip::SpaceShip() : life(3) , meat(0) , shootMode(0)
@@ -42,22 +43,6 @@ void SpaceShip::resetMeat()
 
 void SpaceShip::keyPressEvent(QKeyEvent *event)
 {
-//    if(event->key() == Qt::Key_Left)
-//    {
-//        setPos(x()-10,y());
-//    }
-//    else if (event->key() == Qt::Key_Right)
-//    {
-//        setPos(x()+10,y());
-//    }
-//    else if(event->key() == Qt::Key_Up)
-//    {
-//        setPos(x() , y()-10);
-//    }
-//    else if(event->key() == Qt::Key_Down)
-//    {
-//        setPos(x() , y()+10);
-//    }
    if (event->key() == Qt::Key_Space && game->isStarted  )
     {
         shoot();
@@ -85,6 +70,19 @@ void SpaceShip::collision()
             increaseMeat();
             game->updateStats();
             delete colliding_items[i];
+        }
+        else if(typeid(*(colliding_items[i])) == typeid(Egg)){
+            decreaseLife();
+            game->updateStats();
+            game->updateStats();
+            game->time_collid = game->gTime;
+            game->isCollided = true;
+            setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
+            Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i])));
+            delete colliding_items[i];
+            if(getLife()==0){
+               game->resetLevel();
+            }
         }
 
     }

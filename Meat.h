@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QGraphicsPixmapItem>
+
 class Meat : public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT

@@ -1,5 +1,9 @@
 #include "Hen.h"
 #include "Meat.h"
+#include "Egg.h"
+
+QVector <Hen*>Hen::hens;
+
 extern Game * game;
 Hen::Hen(int w, int h, int i, int r, int c) : Chicken(w, h, i, r, c)
 {
@@ -24,6 +28,14 @@ void Hen::dropMeat()
     Meat *meat = new Meat();
     meat->setPos(x() , y()+20);
     scene()->addItem(meat);
+}
+
+void Hen::dropEgg()
+{
+    Egg *egg = new Egg();
+    egg->setPos(x() , y()+20);
+    Egg::eggs.append(egg);
+    scene()->addItem(egg);
 }
 
 void Hen::changeState()

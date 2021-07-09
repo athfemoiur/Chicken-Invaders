@@ -12,6 +12,7 @@ SOURCES += \
     Bullet.cpp \
     Chicken.cpp \
     Controller.cpp \
+    Egg.cpp \
     Game.cpp \
     Hen.cpp \
     Meat.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     Bullet.h \
     Chicken.h \
     Controller.h \
+    Egg.h \
     Game.h \
     Hen.h \
     Meat.h \

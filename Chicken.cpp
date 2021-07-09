@@ -1,6 +1,6 @@
 #include "Chicken.h"
 #include "Spaceship.h"
-#include "Game.h"
+
 extern Game *game;
 Chicken::Chicken(int w, int h, int i, int r, int c) : width(w), height(h), index(i), row(r), column(c)
 {

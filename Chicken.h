@@ -4,6 +4,7 @@
 #include "QObject"
 #include "QTimer"
 #include "Game.h"
+
 class Chicken :public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
