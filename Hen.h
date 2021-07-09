@@ -16,7 +16,7 @@ public:
 public slots:
     void changeState() override;
 
-    void moveDown() override;
+
 
 
 

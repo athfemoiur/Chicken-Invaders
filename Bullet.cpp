@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include "Game.h"
 #include "Chicken.h"
-
+#include "Hen.h"
 extern Game * game;
 
 Bullet::Bullet()
@@ -18,14 +18,14 @@ void Bullet::move()
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
-        if (typeid((*colliding_items[i])) == typeid(Chicken)){
+        if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen) ){
 
               game->increasePoint(5);
               game->updateStats();
 
               delete this;
 
-              Chicken *temp = static_cast<Chicken *>(colliding_items[i]);
+              Chicken *temp = dynamic_cast<Chicken *>(colliding_items[i]);
               temp->decreaseHealth();
               if(temp->getHealth() == 0){
 //                  temp->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));

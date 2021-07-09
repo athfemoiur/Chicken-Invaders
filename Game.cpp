@@ -240,25 +240,25 @@ void Game::addChicken()
 void Game::addChickenAndHen()
 {
 
-    int startX =width/2-100*chikenColumn+40;
+    int startX =width/2-100*chikenColumn+250;
     int startY = 0;
     for(int i=1; i<=chickenNum; i++){
         if(i%2 == 0){
             Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
             chk->setPos(startX, startY);
             scene->addItem(chk);
-            startX += 200;
+            startX += 160;
         }
         else{
             Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn );
             hen->setPos(startX, startY);
             scene->addItem(hen);
-            startX += 200;
+            startX += 160;
         }
 
         if(i % chikenColumn ==0){
             startY += 100;
-            startX = width/2-100*chikenColumn +40;
+            startX = width/2-100*chikenColumn +250;
        }
     }
 }

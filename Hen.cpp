@@ -13,7 +13,7 @@ Hen::Hen(int w, int h, int i, int r, int c) : Chicken(w, h, i, r, c)
 void Hen::animation()
 {
     animationTimer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(changeState()));
+    connect(timer,SIGNAL(timeout()),this,SLOT(Hen::changeState()));
     animationTimer->start(190);
 }
 
@@ -26,9 +26,4 @@ void Hen::changeState()
     counter++;
 }
 
-void Hen::moveDown()
-{
-    int row = (index - 1) / column + 1;
-    if(y() < height * 2 / 3 - 100 - (4 - row) * 100)
-        setPos(x(), y() + 14);
-}
+
