@@ -5,6 +5,7 @@
 #include "Egg.h"
 #include "Hen.h"
 #include "Gift.h"
+#include "Superchicken.h"
 extern Game * game;
 
 SpaceShip::SpaceShip() : life(3) , shootMode(0)
@@ -43,10 +44,15 @@ void SpaceShip::collision()
 {
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
-        if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen)){
+        if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen)
+                || typeid((*colliding_items[i])) == typeid(SuperChicken)){
             if(typeid((*colliding_items[i])) == typeid(Hen)){
                 static_cast<Hen *>(colliding_items[i])->isCollided = true;
                 Hen::hens.remove(Hen::hens.indexOf(static_cast<Hen *>(colliding_items[i])));
+            }
+            else if(typeid((*colliding_items[i])) == typeid(SuperChicken)){
+                dynamic_cast<SuperChicken *>(colliding_items[i])->isCollided = true;
+                Hen::hens.remove(Hen::hens.indexOf(dynamic_cast<SuperChicken *>(colliding_items[i])));
             }
                 decreaseLife();
                 game->time_collid = game->gTime;
