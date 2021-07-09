@@ -11,8 +11,10 @@ public:
     void decreaseLife();
     int getLife() { return life; }
     int getMeat() { return meat; }
+    void collision();
 private:
-    void keyPressEvent(QKeyEvent * event); // for Handlening Movement
+    void keyPressEvent(QKeyEvent * event);// for Handlening Movement
+
 private:
     Bullet *bullet;
     QTimer *timer;

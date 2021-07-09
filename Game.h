@@ -14,7 +14,7 @@ class Game :   public QGraphicsView
 
     Q_OBJECT
     friend class Controller;
-
+    friend class SpaceShip;
 public:
 
     Game(int , int , int);
@@ -50,7 +50,7 @@ private:
 
 
     void mouseMoveEvent(QMouseEvent *event);
-    void shipColision();
+    void resetLevel();
     void checkLevel();
     void setcursor();
     void setTimer();    
@@ -65,7 +65,7 @@ private:
 
 private:
     int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level;
-    bool isCollided;
+    bool isCollided , isStarted;
 
 };
 #endif // GAME_H

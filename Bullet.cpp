@@ -28,6 +28,7 @@ void Bullet::move()
               Chicken *temp = static_cast<Chicken *>(colliding_items[i]);
               temp->decreaseHealth();
               if(temp->getHealth() == 0){
+                  temp->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
                   game->setChickenNum(game->getChickenNum() - 1);
                   delete colliding_items[i];
               }

@@ -8,6 +8,7 @@ extern Game *game;
 
 Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) ,isCollided(false)
 {
+    isStarted = false;
     isLevFinished = false;
     setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
     setcursor();
@@ -71,7 +72,7 @@ void Game::setChickenNum(int num)
 
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
-    shipColision();
+    ship->collision();
     if (!isCollided)
         ship->setPos(event->x()-35 , event->y()-35);
 }
@@ -115,7 +116,9 @@ void Game::setBackground()
 
 void Game::setNextLevel()
 {
-     isLevFinished= false;
+    isStarted =false;
+    ship->setPos(600 ,600);
+    isLevFinished= false;
     gTime= 0;
     ++level;
     checkLevel();
@@ -127,15 +130,17 @@ void Game::schedule()
 {
     gTime++;
     if(gTime == 4){
+        isStarted = true;
         if(level<2){
             resboard->hide();
             addChicken();
         }
         else if (level>=2 && level <4){
+             resboard->hide();
 
         }
     }
-    if(time_collid + 2 == gTime){
+    if(time_collid + 1 == gTime){
         ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
         isCollided = false;
     }
@@ -145,25 +150,14 @@ void Game::schedule()
     }
 }
 
-void Game::shipColision()
+void Game::resetLevel()
 {
-    QList<QGraphicsItem *> colliding_items = ship->collidingItems();
-    for (int i = 0, n = colliding_items.size(); i < n; ++i){
-        if (typeid(*(colliding_items[i])) == typeid(Chicken)){
-                ship->decreaseLife();
-                time_collid = gTime;
-                isCollided = true;
-                ship->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
-                updateStats();
-                delete colliding_items[i];
-                setChickenNum(getChickenNum() - 1);
-
-                if(ship->getLife()==0){
-                    close();
-                }
-                return;
-        }
-    }
+    isStarted = false;
+    ship->setPos(600 ,600);
+    gTime= 0;
+    level=0;
+    checkLevel();
+    setscene();
 }
 
 void Game::checkLevel()
@@ -187,7 +181,6 @@ void Game::increasePoint(int p)
 {
     score += p;
 }
-
 
 void Game::addShip()
 {

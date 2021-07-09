@@ -38,9 +38,29 @@ void SpaceShip::keyPressEvent(QKeyEvent *event)
 //    {
 //        setPos(x() , y()+10);
 //    }
-   if (event->key() == Qt::Key_Space)
+   if (event->key() == Qt::Key_Space && game->isStarted  )
     {
         shoot();
+   }
+}
+
+void SpaceShip::collision()
+{
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i){
+        if (typeid(*(colliding_items[i])) == typeid(Chicken)){
+                decreaseLife();
+                game->time_collid = game->gTime;
+                game->isCollided = true;
+                setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
+                game->updateStats();
+                delete colliding_items[i];
+                game->setChickenNum(game->getChickenNum() - 1);
+                if(getLife()==0){
+                   game->resetLevel();
+                }
+                return;
+        }
     }
 }
 
