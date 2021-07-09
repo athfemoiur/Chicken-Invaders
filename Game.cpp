@@ -8,7 +8,7 @@
 
 extern Game *game;
 
-Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) ,isCollided(false)
+Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) , meat(0), isCollided(false)
 {
     isStarted = false;
     isLevFinished = false;
@@ -210,12 +210,27 @@ void Game::checkLevel()
     chickenNum = chickenRow * chikenColumn;
 }
 
+void Game::increaseMeat()
+{
+    if(meat==50){
+        game->increasePoint(50);
+        resetMeat();
+    }else{
+        meat++;
+    }
+}
+
+void Game::resetMeat()
+{
+    meat =0;
+}
+
 void Game::updateStats()
 {
       lifeboard->setPlainText( QString::number((ship->getLife())));
       scoreboard->setPlainText(QString::number(score));
       if(level>=2){
-        meatboard->setPlainText(QString::number(ship->getMeat()));
+        meatboard->setPlainText(QString::number(meat));
       }
 }
 
@@ -265,7 +280,7 @@ void Game::addResBoard()
 void Game::addMeatBoard()
 {
     meatboard = new QGraphicsTextItem;
-    meatboard->setPlainText(QString::number(ship->getMeat()));
+    meatboard->setPlainText(QString::number(meat));
     meatboard->setDefaultTextColor(Qt::white);
     meatboard->setFont(QFont("Bw Stretch Medium",30));
     meatboard->setPos(160,970);

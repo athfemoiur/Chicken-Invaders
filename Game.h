@@ -57,6 +57,9 @@ private:
     void mouseMoveEvent(QMouseEvent *event);
     void resetLevel();
     void checkLevel();
+    void increaseMeat();
+
+    void resetMeat();
     void setcursor();
     void setTimer();    
     void setscene();
@@ -70,7 +73,7 @@ private:
     void addChicken();
     void addChickenAndHen();
 private:
-    int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level;
+    int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level , meat;
     bool isCollided , isStarted;
 
 };

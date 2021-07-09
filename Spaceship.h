@@ -7,13 +7,10 @@ class SpaceShip :public QObject , public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    SpaceShip(int = 0);
+    SpaceShip();
     void increaseLife();
     void decreaseLife();
-    void increaseMeat();
-    void resetMeat();
     int getLife() { return life; }
-    int getMeat() { return meat; }
 public slots:
     void collision();
 private:
@@ -25,7 +22,7 @@ private:
 private:
     void shoot();
 private:
-    int life, meat, shootMode;
+    int life, shootMode;
 
 };
 

@@ -6,7 +6,7 @@
 #include "Hen.h"
 extern Game * game;
 
-SpaceShip::SpaceShip(int m) : life(3) , meat(m) , shootMode(0)
+SpaceShip::SpaceShip() : life(3) , shootMode(0)
 {
 
     setFocus(); // for focus of keyevents (space)
@@ -28,20 +28,7 @@ void SpaceShip::decreaseLife()
     life --;
 }
 
-void SpaceShip::increaseMeat()
-{
-    if(meat==50){
-        game->increasePoint(50);
-        resetMeat();
-    }else{
-        meat++;
-    }
-}
 
-void SpaceShip::resetMeat()
-{
-    meat =0;
-}
 
 void SpaceShip::keyPressEvent(QKeyEvent *event)
 {
@@ -74,7 +61,7 @@ void SpaceShip::collision()
         }
 
         else if(typeid(*(colliding_items[i])) == typeid(Meat)){
-            increaseMeat();
+            game->increaseMeat();
             game->updateStats();
             delete colliding_items[i];
         }
@@ -116,7 +103,7 @@ void SpaceShip::shoot()
     {
 
         bullet = new Bullet();
-        bullet->setPos(x()+20,y()-150);
+        bullet->setPos(x()+45,y()-150);
         scene()->addItem(bullet);
 
     }
