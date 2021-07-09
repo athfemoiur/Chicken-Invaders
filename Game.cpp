@@ -110,7 +110,11 @@ void Game::setscene()
 
 void Game::setBackground()
 {
+    if(level <2){
     setBackgroundBrush(QPixmap(":/Backgrounds/Images/LevelOneBack.png"));
+    }else{
+        setBackgroundBrush(QPixmap(":/Backgrounds/Images/LevelTwoeBack.png"));
+    }
 }
 
 void Game::setNextLevel()
@@ -122,6 +126,7 @@ void Game::setNextLevel()
     ++level;
     checkLevel();
     setscene();
+    setBackground();
 
 }
 
@@ -157,6 +162,7 @@ void Game::resetLevel()
     level=0;
     checkLevel();
     setscene();
+    setBackground();
 }
 
 void Game::checkLevel()
@@ -199,7 +205,11 @@ void Game::addLifeBoard()
     lifeboard->setPlainText( QString::number((ship->getLife())));
     lifeboard->setDefaultTextColor(Qt::white);
     lifeboard->setFont(QFont("Bw Stretch Medium",30));
-    lifeboard->setPos(90,970);
+    if(level<2){
+        lifeboard->setPos(90,970);
+    }else{
+        lifeboard->setPos(70,970);
+    }
 }
 
 void Game::addScoreBoard()
