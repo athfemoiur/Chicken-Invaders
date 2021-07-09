@@ -18,6 +18,7 @@ SOURCES += \
     Hen.cpp \
     Meat.cpp \
     Spaceship.cpp \
+    Superchicken.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -31,6 +32,7 @@ HEADERS += \
     Hen.h \
     Meat.h \
     Spaceship.h \
+    Superchicken.h \
     mainwindow.h
 
 FORMS +=

@@ -58,7 +58,6 @@ private:
     void resetLevel();
     void checkLevel();
     void increaseMeat();
-
     void resetMeat();
     void setcursor();
     void setTimer();    
@@ -72,6 +71,8 @@ private:
     void addMeatBoard();
     void addChicken();
     void addChickenAndHen();
+    void addSuperChickenAndHen();
+    void addSuperChicken();
 private:
     int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level , meat;
     bool isCollided , isStarted;

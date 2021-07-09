@@ -6,6 +6,7 @@
 #include "Egg.h"
 #include "QException"
 #include "Gift.h"
+#include "Superchicken.h"
 extern Game *game;
 
 Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) , meat(0), isCollided(false)
@@ -32,7 +33,6 @@ Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4
 
 Game::~Game()
 {
-    // destructor must not delete ptr
 
     delete scene;
     delete ship;
@@ -147,7 +147,7 @@ void Game::schedule()
             Egg::eggs.removeAt(i);
         }
     }
-    if(gTime == 5 ){
+    if(gTime == 15 && level>3 ){
         Gift *gift = new Gift;
         gift->setPos( rand() % width,0);
         scene->addItem(gift);
@@ -158,23 +158,42 @@ void Game::schedule()
             resboard->hide();
             addChicken();
         }
-        else if (level>=2 && level <4){
+        else if (level > 1 && level <4){
              Egg::eggs.clear();
              Hen::hens.clear();
              resboard->hide();
              addChickenAndHen();
         }
+        else if(level ==4){
+            Egg::eggs.clear();
+            Hen::hens.clear();
+            resboard->hide();
+            addSuperChickenAndHen();
+        }else if(level == 5){
+            Egg::eggs.clear();
+            Hen::hens.clear();
+            resboard->hide();
+            addSuperChicken();
+        }
     }
-    if(gTime % 5 == 0 && level >=2){
+    if(gTime % 5 == 0 && (level ==2 || level ==3)){
         int tempRand = rand() % 4;
-        for (int i = 0; i < 4; i++) {
-            if (tempRand < Hen::hens.size() - 1 && !Hen::hens[tempRand]->isCollided){
+        for (int i = 0; i < 6; i++) {
+            if (tempRand < Hen::hens.size() - 1){
                 Hen::hens[tempRand]->dropEgg();
             }
             tempRand++;
         }
     }
-
+    if(gTime % 6 == 0 && level > 3){
+        int tempRand = rand() % 4;
+        for (int i = 0; i < 4; i++) {
+            if (tempRand < Hen::hens.size() - 1){
+                Hen::hens[tempRand]->dropEgg();
+            }
+            tempRand++;
+        }
+    }
     if(time_collid + 1 == gTime){
         ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
         isCollided = false;
@@ -198,6 +217,9 @@ void Game::resetLevel()
 
 void Game::checkLevel()
 {
+    if(level >1){
+         chickenRow = 3;
+    }
     if(level == 0) {
         chikenColumn = 5;
     }
@@ -205,12 +227,15 @@ void Game::checkLevel()
         chikenColumn = 9;
     }
     else if(level == 2){
-        chickenRow = 3;
         chikenColumn = 8;
     }
     else if(level == 3){
-        chickenRow = 3;
         chikenColumn = 10;
+    }
+    else if(level == 4){
+        chikenColumn = 6;
+    }else if(level == 5){
+         chikenColumn = 10;
     }
     chickenNum = chickenRow * chikenColumn;
 }
@@ -355,5 +380,49 @@ void Game::addChickenAndHen()
                startX = width/2-100*chikenColumn +250;
           }
       }
+    }
+}
+
+void Game::addSuperChickenAndHen()
+{
+    int startX =width/2-100*chikenColumn+250;
+    int startY = 0;
+        for(int i=1; i<=chickenNum; i++){
+
+            if(i%2 == 0){
+               SuperChicken *chk = new SuperChicken(width, height, i, chickenRow, chikenColumn );
+               chk->setPos(startX, startY);
+               scene->addItem(chk);
+               startX += 160;
+           }
+           else{
+               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn );
+               Hen::hens.append(hen);
+               hen->setPos(startX, startY);
+               scene->addItem(hen);
+               startX += 160;
+           }
+
+           if(i % chikenColumn ==0){
+               startY += 100;
+               startX = width/2-100*chikenColumn +250;
+          }
+
+        }
+}
+
+void Game::addSuperChicken()
+{
+    int startX =width/2-100*chikenColumn+40;
+    int startY = 0;
+    for (int i = 1;i <= chickenNum; i++) {
+        SuperChicken *chk = new SuperChicken(width, height, i, chickenRow, chikenColumn );
+        chk->setPos(startX, startY);
+        scene->addItem(chk);
+        startX += 160;
+        if(i % chikenColumn ==0){
+            startY += 100;
+            startX = width/2-100*chikenColumn +40;
+        }
     }
 }
