@@ -4,6 +4,7 @@
 #include <QDebug>
 #include "Egg.h"
 #include "Hen.h"
+#include "Gift.h"
 extern Game * game;
 
 SpaceShip::SpaceShip() : life(3) , shootMode(0)
@@ -65,6 +66,11 @@ void SpaceShip::collision()
             game->updateStats();
             delete colliding_items[i];
         }
+        else if(typeid(*(colliding_items[i])) == typeid(Gift)){
+            shootMode = 1;
+            delete colliding_items[i];
+        }
+
         else if(typeid(*(colliding_items[i])) == typeid(Egg)){
             decreaseLife();
             game->updateStats();
@@ -92,11 +98,11 @@ void SpaceShip::shoot()
     if(shootMode == 1)
     {
         bullet = new Bullet();
-        bullet->setPos(x(),y()+10);
+        bullet->setPos(x()+15,y()-150);
         scene()->addItem(bullet);
 
         bullet = new Bullet();
-        bullet->setPos(x()+25,y());
+        bullet->setPos(x()+80,y()-150);
         scene()->addItem(bullet);
     }
     else

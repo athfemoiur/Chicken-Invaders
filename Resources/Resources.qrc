@@ -16,6 +16,7 @@
         <file>Images/drumsticChickenone.png</file>
         <file>Images/egg.png</file>
         <file>Images/fEgg.png</file>
+        <file>Images/gift.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/02-01. Main Theme.mp3</file>

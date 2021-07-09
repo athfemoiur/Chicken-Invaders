@@ -5,7 +5,7 @@
 #include "Hen.h"
 #include "Egg.h"
 #include "QException"
-
+#include "Gift.h"
 extern Game *game;
 
 Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) , meat(0), isCollided(false)
@@ -146,6 +146,11 @@ void Game::schedule()
             delete Egg::eggs[i];
             Egg::eggs.removeAt(i);
         }
+    }
+    if(gTime == 5 ){
+        Gift *gift = new Gift;
+        gift->setPos( rand() % width,0);
+        scene->addItem(gift);
     }
     if(gTime == 4){
         isStarted = true;
