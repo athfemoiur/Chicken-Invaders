@@ -3,6 +3,7 @@
 #include "Meat.h"
 #include <QDebug>
 #include "Egg.h"
+#include "Hen.h"
 extern Game * game;
 
 SpaceShip::SpaceShip() : life(3) , meat(0) , shootMode(0)
@@ -53,7 +54,10 @@ void SpaceShip::collision()
 {
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
-        if (typeid(*(colliding_items[i])) == typeid(Chicken)){
+        if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen)){
+            if(typeid((*colliding_items[i])) == typeid(Hen)){
+                static_cast<Hen *>(colliding_items[i])->isCollided = true;
+            }
                 decreaseLife();
                 game->time_collid = game->gTime;
                 game->isCollided = true;
@@ -64,8 +68,9 @@ void SpaceShip::collision()
                 if(getLife()==0){
                    game->resetLevel();
                 }
-                return;
+
         }
+
         else if(typeid(*(colliding_items[i])) == typeid(Meat)){
             increaseMeat();
             game->updateStats();

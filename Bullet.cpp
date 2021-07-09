@@ -36,6 +36,7 @@ void Bullet::move()
                   }
                   else if(typeid((*colliding_items[i])) == typeid(Hen)){
                       game->increasePoint(10);
+                      dynamic_cast<Hen *>(temp)->isCollided = true;
                       dynamic_cast<Hen *>(temp)->dropMeat();
                   }
 

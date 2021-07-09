@@ -156,8 +156,10 @@ void Game::schedule()
         }
     }
     if(gTime % 5 == 0 && level >=2){
+        int tempRand = rand() % 4;
         for (int i = 0; i < 4; i++) {
-            Hen::hens[i]->dropEgg();
+            if (!Hen::hens[tempRand]->isCollided)
+                Hen::hens[tempRand++]->dropEgg();
         }
     }
     if(time_collid + 1 == gTime){

@@ -14,6 +14,7 @@ public:
     void dropMeat();
     void dropEgg();
     static QVector<Hen *> hens;
+    bool isCollided;
 
 public slots:
     void changeState() override;

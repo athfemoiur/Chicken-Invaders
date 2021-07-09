@@ -7,6 +7,7 @@ QVector <Hen*>Hen::hens;
 extern Game * game;
 Hen::Hen(int w, int h, int i, int r, int c) : Chicken(w, h, i, r, c)
 {
+    isCollided = false;
     health = 2;
     setPixmap(QPixmap(":/Icons/Images/hen1.png")); // set icon for bullet object
     timer = new QTimer(this);
