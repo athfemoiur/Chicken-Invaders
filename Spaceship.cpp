@@ -58,6 +58,7 @@ void SpaceShip::collision()
         if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen)){
             if(typeid((*colliding_items[i])) == typeid(Hen)){
                 static_cast<Hen *>(colliding_items[i])->isCollided = true;
+                Hen::hens.remove(Hen::hens.indexOf(static_cast<Hen *>(colliding_items[i])));
             }
                 decreaseLife();
                 game->time_collid = game->gTime;

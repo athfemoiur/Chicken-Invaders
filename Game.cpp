@@ -4,6 +4,7 @@
 #include "QMediaPlayer"
 #include "Hen.h"
 #include "Egg.h"
+#include "QException"
 
 extern Game *game;
 
@@ -162,12 +163,13 @@ void Game::schedule()
     if(gTime % 5 == 0 && level >=2){
         int tempRand = rand() % 4;
         for (int i = 0; i < 4; i++) {
-            if (!Hen::hens[tempRand]->isCollided){
+            if (tempRand < Hen::hens.size() - 1 && !Hen::hens[tempRand]->isCollided){
                 Hen::hens[tempRand]->dropEgg();
             }
             tempRand++;
         }
     }
+
     if(time_collid + 1 == gTime){
         ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
         isCollided = false;

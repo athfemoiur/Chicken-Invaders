@@ -39,6 +39,7 @@ void Bullet::move()
                       game->increasePoint(10);
                       dynamic_cast<Hen *>(temp)->isCollided = true;
                       dynamic_cast<Hen *>(temp)->dropMeat();
+                      Hen::hens.remove(Hen::hens.indexOf(static_cast<Hen *>(colliding_items[i])));
                   }
 
                   game->setChickenNum(game->getChickenNum() - 1);
