@@ -62,7 +62,7 @@ private:
     void addScoreBoard();
     void addResBoard();
     void addChicken();
-
+    void addChickenAndHen();
 private:
     int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level;
     bool isCollided , isStarted;

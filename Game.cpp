@@ -137,7 +137,7 @@ void Game::schedule()
         }
         else if (level>=2 && level <4){
              resboard->hide();
-
+             addChickenAndHen();
         }
     }
     if(time_collid + 1 == gTime){
@@ -167,6 +167,11 @@ void Game::checkLevel()
     }
     else if (level ==1) {
         chikenColumn = 9;
+    }
+    else if(level == 2){
+        chickenRow = 3;
+        chikenColumn = 10;
+
     }
     chickenNum = chickenRow * chikenColumn;
 }
@@ -229,5 +234,31 @@ void Game::addChicken()
             startY += 100;
             startX = width/2-100*chikenColumn +40;
         }
+    }
+}
+
+void Game::addChickenAndHen()
+{
+
+    int startX =width/2-100*chikenColumn+40;
+    int startY = 0;
+    for(int i=1; i<=chickenNum; i++){
+        if(i%2 == 0){
+            Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn );
+            chk->setPos(startX, startY);
+            scene->addItem(chk);
+            startX += 200;
+        }
+        else{
+            Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn );
+            hen->setPos(startX, startY);
+            scene->addItem(hen);
+            startX += 200;
+        }
+
+        if(i % chikenColumn ==0){
+            startY += 100;
+            startX = width/2-100*chikenColumn +40;
+       }
     }
 }

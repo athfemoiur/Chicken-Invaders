@@ -28,7 +28,8 @@ void Bullet::move()
               Chicken *temp = static_cast<Chicken *>(colliding_items[i]);
               temp->decreaseHealth();
               if(temp->getHealth() == 0){
-                  temp->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
+//                  temp->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
+
                   game->setChickenNum(game->getChickenNum() - 1);
                   delete colliding_items[i];
               }
@@ -38,7 +39,7 @@ void Bullet::move()
                   game->isLevFinished = true;
 
               }else if(game->getChickenNum() == 0 && game->getLevel()==1){
-                  game->close();
+                  game->isLevFinished = true;
               }
             // return (all code below refers to a non existint bullet)
               return;
