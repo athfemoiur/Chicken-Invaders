@@ -243,7 +243,7 @@ void Game::addMeatBoard()
     meatboard->setPlainText(QString::number(ship->getMeat()));
     meatboard->setDefaultTextColor(Qt::white);
     meatboard->setFont(QFont("Bw Stretch Medium",30));
-    meatboard->setPos(180,970);
+    meatboard->setPos(165,970);
 }
 
 void Game::addChicken()
