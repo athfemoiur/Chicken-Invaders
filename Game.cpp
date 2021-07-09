@@ -153,6 +153,7 @@ void Game::schedule()
             addChicken();
         }
         else if (level>=2 && level <4){
+             Egg::eggs.clear();
              resboard->hide();
              addChickenAndHen();
         }
@@ -160,8 +161,10 @@ void Game::schedule()
     if(gTime % 5 == 0 && level >=2){
         int tempRand = rand() % 4;
         for (int i = 0; i < 4; i++) {
-            if (!Hen::hens[tempRand]->isCollided)
-                Hen::hens[tempRand++]->dropEgg();
+            if (!Hen::hens[tempRand]->isCollided){
+                Hen::hens[tempRand]->dropEgg();
+            }
+            tempRand++;
         }
     }
     if(time_collid + 1 == gTime){

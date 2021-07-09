@@ -6,8 +6,9 @@
 #include "Hen.h"
 extern Game * game;
 
-SpaceShip::SpaceShip() : life(3) , meat(0) , shootMode(0)
+SpaceShip::SpaceShip(int m) : life(3) , meat(m) , shootMode(0)
 {
+
     setFocus(); // for focus of keyevents (space)
     setPixmap(QPixmap(":/Icons/Images/ship.png"));
     setPos(600 , 600);

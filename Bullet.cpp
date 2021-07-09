@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Chicken.h"
 #include "Hen.h"
+#include "Egg.h"
 
 extern Game * game;
 
@@ -49,6 +50,13 @@ void Bullet::move()
                   game->isLevFinished = true;
               }
               return;
+        }
+        else if (typeid((*colliding_items[i])) == typeid(Egg)) {
+            game->increasePoint(5);
+            game->updateStats();
+            game->updateStats();
+            Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i])));
+            delete colliding_items[i];
         }
     }
 

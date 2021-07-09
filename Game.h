@@ -16,6 +16,7 @@ class Game : public QGraphicsView
     Q_OBJECT
     friend class Controller;
     friend class SpaceShip;
+    friend class Bullet;
 
 public:
 
