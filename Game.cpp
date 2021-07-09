@@ -140,6 +140,8 @@ void Game::setNextLevel()
 
 void Game::schedule()
 {
+    if(level == 6 && gameFinishedTime + 2 == gTime)
+        this->close();
     gTime++;
     for (int i = 0; i < Egg::eggs.size(); i++) {
         if(Egg::eggs[i]->isHited && Egg::eggs[i]->hitTime + 1 == gTime){
@@ -235,7 +237,10 @@ void Game::checkLevel()
     else if(level == 4){
         chikenColumn = 6;
     }else if(level == 5){
-         chikenColumn = 10;
+         chikenColumn = 9;    
+    }
+    else if(level == 6){
+         gameFinishedTime = gTime;
     }
     chickenNum = chickenRow * chikenColumn;
 }
@@ -392,6 +397,7 @@ void Game::addSuperChickenAndHen()
             if(i%2 == 0){
                SuperChicken *chk = new SuperChicken(width, height, i, chickenRow, chikenColumn );
                chk->setPos(startX, startY);
+               Hen::hens.append(chk);
                scene->addItem(chk);
                startX += 160;
            }
@@ -413,16 +419,17 @@ void Game::addSuperChickenAndHen()
 
 void Game::addSuperChicken()
 {
-    int startX =width/2-100*chikenColumn+40;
+    int startX =width/2-100*chikenColumn+200;
     int startY = 0;
     for (int i = 1;i <= chickenNum; i++) {
         SuperChicken *chk = new SuperChicken(width, height, i, chickenRow, chikenColumn );
         chk->setPos(startX, startY);
+        Hen::hens.append(chk);
         scene->addItem(chk);
         startX += 160;
         if(i % chikenColumn ==0){
             startY += 100;
-            startX = width/2-100*chikenColumn +40;
+            startX = width/2-100*chikenColumn +200;
         }
     }
 }

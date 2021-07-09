@@ -35,6 +35,7 @@ public:
     int gTime;
     bool isLevFinished;
     Controller *cnt;
+    int gameFinishedTime;
 
 private:
 

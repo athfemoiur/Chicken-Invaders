@@ -3,7 +3,7 @@
 #include "Chicken.h"
 #include "Hen.h"
 #include "Egg.h"
-
+#include "Superchicken.h"
 extern Game * game;
 
 Bullet::Bullet()
@@ -20,7 +20,8 @@ void Bullet::move()
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
-        if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen) ){
+        if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen)
+                || typeid((*colliding_items[i])) == typeid(SuperChicken)){
 
 
               game->updateStats();
@@ -40,6 +41,12 @@ void Bullet::move()
                       dynamic_cast<Hen *>(temp)->isCollided = true;
                       dynamic_cast<Hen *>(temp)->dropMeat();
                       Hen::hens.remove(Hen::hens.indexOf(static_cast<Hen *>(colliding_items[i])));
+                  }
+                  else if(typeid((*colliding_items[i])) == typeid(SuperChicken)){
+                      game->increasePoint(10);
+                      dynamic_cast<SuperChicken *>(temp)->isCollided = true;
+                      dynamic_cast<SuperChicken *>(temp)->dropMeat();
+                      Hen::hens.remove(Hen::hens.indexOf(dynamic_cast<SuperChicken *>(colliding_items[i])));
                   }
 
                   game->setChickenNum(game->getChickenNum() - 1);
