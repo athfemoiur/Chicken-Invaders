@@ -13,6 +13,7 @@
         <file>Images/ship.png</file>
         <file>Images/hen1.png</file>
         <file>Images/hen2.png</file>
+        <file>Images/drumsticChickenone.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/02-01. Main Theme.mp3</file>

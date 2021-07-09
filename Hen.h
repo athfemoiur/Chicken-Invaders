@@ -11,13 +11,10 @@ public:
 
 public:
     void animation() override;
-
+    void dropMeat();
 
 public slots:
     void changeState() override;
-
-
-
 
 
 

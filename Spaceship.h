@@ -9,6 +9,8 @@ public:
     SpaceShip();
     void increaseLife();
     void decreaseLife();
+    void increaseMeat();
+    void resetMeat();
     int getLife() { return life; }
     int getMeat() { return meat; }
     void collision();

@@ -14,6 +14,7 @@ SOURCES += \
     Controller.cpp \
     Game.cpp \
     Hen.cpp \
+    Meat.cpp \
     Spaceship.cpp \
     main.cpp \
     mainwindow.cpp
@@ -24,6 +25,7 @@ HEADERS += \
     Controller.h \
     Game.h \
     Hen.h \
+    Meat.h \
     Spaceship.h \
     mainwindow.h
 

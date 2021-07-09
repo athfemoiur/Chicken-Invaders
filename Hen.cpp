@@ -1,5 +1,6 @@
 #include "Hen.h"
-
+#include "Meat.h"
+extern Game * game;
 Hen::Hen(int w, int h, int i, int r, int c) : Chicken(w, h, i, r, c)
 {
     health = 2;
@@ -15,6 +16,14 @@ void Hen::animation()
     animationTimer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(Hen::changeState()));
     animationTimer->start(190);
+}
+
+void Hen::dropMeat()
+{
+
+    Meat *meat = new Meat();
+    meat->setPos(x() , y()+20);
+    scene()->addItem(meat);
 }
 
 void Hen::changeState()

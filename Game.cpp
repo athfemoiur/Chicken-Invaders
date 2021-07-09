@@ -30,11 +30,11 @@ Game::~Game()
 {
     // destructor must not delete ptr
 
-//    delete scene;
-//    delete ship;
-//    delete scoreboard;
-//    delete lifeboard;
-//    delete timer;
+    delete scene;
+    delete ship;
+    delete scoreboard;
+    delete lifeboard;
+    delete timer;
 
 }
 
@@ -152,7 +152,7 @@ void Game::schedule()
 
 void Game::resetLevel()
 {
-    isStarted = false;
+    isStarted = true;
     ship->setPos(600 ,600);
     gTime= 0;
     level=0;

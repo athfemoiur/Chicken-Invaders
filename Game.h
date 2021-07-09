@@ -9,12 +9,13 @@
 
 
 
-class Game :   public QGraphicsView
+class Game : public QGraphicsView
 {
 
     Q_OBJECT
     friend class Controller;
     friend class SpaceShip;
+
 public:
 
     Game(int , int , int);

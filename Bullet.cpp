@@ -20,7 +20,7 @@ void Bullet::move()
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen) ){
 
-              game->increasePoint(5);
+
               game->updateStats();
 
               delete this;
@@ -28,7 +28,15 @@ void Bullet::move()
               Chicken *temp = dynamic_cast<Chicken *>(colliding_items[i]);
               temp->decreaseHealth();
               if(temp->getHealth() == 0){
-//                  temp->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
+//                temp->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
+
+                  if(typeid((*colliding_items[i])) == typeid(Chicken)){
+                      game->increasePoint(5);
+                  }
+                  else if(typeid((*colliding_items[i])) == typeid(Hen)){
+                      game->increasePoint(10);
+                      dynamic_cast<Hen *>(temp)->dropMeat();
+                  }
 
                   game->setChickenNum(game->getChickenNum() - 1);
                   delete colliding_items[i];

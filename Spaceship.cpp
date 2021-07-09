@@ -1,5 +1,6 @@
 #include "Spaceship.h"
 #include "Game.h"
+#include "Meat.h"
 #include <QDebug>
 extern Game * game;
 
@@ -18,6 +19,21 @@ void SpaceShip::increaseLife()
 void SpaceShip::decreaseLife()
 {
     life --;
+}
+
+void SpaceShip::increaseMeat()
+{
+    if(meat==50){
+        game->increasePoint(50);
+        resetMeat();
+    }else{
+        meat++;
+    }
+}
+
+void SpaceShip::resetMeat()
+{
+    meat =0;
 }
 
 void SpaceShip::keyPressEvent(QKeyEvent *event)
@@ -61,6 +77,11 @@ void SpaceShip::collision()
                 }
                 return;
         }
+        else if(typeid(*(colliding_items[i])) == typeid(Meat)){
+            increaseMeat();
+            delete colliding_items[i];
+        }
+
     }
 }
 
