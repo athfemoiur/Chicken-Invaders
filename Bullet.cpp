@@ -44,14 +44,10 @@ void Bullet::move()
                   delete colliding_items[i];
               }
 
-              if(game->getChickenNum() == 0 && game->getLevel() == 0){
+              if(game->getChickenNum() == 0){
 
-                  game->isLevFinished = true;
-
-              }else if(game->getChickenNum() == 0 && game->getLevel()==1){
                   game->isLevFinished = true;
               }
-            // return (all code below refers to a non existint bullet)
               return;
         }
     }

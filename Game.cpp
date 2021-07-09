@@ -18,10 +18,12 @@ Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4
     setFocus();
     setBackground();
     setscene();
+
 //    auto musicPlayer = new QMediaPlayer;
 //    musicPlayer->setMedia(QUrl("qrc:/Sounds/Sounds/02-01. Main Theme.mp3"));
 //    musicPlayer->setVolume(50);
 //    musicPlayer->play();
+
     checkLevel();
     resboard->hide();
 
@@ -193,8 +195,11 @@ void Game::checkLevel()
     }
     else if(level == 2){
         chickenRow = 3;
+        chikenColumn = 8;
+    }
+    else if(level == 3){
+        chickenRow = 3;
         chikenColumn = 10;
-
     }
     chickenNum = chickenRow * chikenColumn;
 }

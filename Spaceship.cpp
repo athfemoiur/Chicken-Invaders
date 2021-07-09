@@ -91,6 +91,11 @@ void SpaceShip::collision()
         }
 
     }
+    if(game->getChickenNum() == 0){
+
+        game->isLevFinished = true;
+        return;
+    }
 }
 
 void SpaceShip::shoot()
