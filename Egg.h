@@ -10,6 +10,7 @@ class Egg :public QObject,public QGraphicsPixmapItem
 
 public:
     Egg();
+    ~Egg();
     QTimer *timer;
     int hitTime;
     bool isHited;

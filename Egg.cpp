@@ -14,6 +14,11 @@ Egg::Egg()
     isHited = false;
 }
 
+Egg::~Egg()
+{
+    delete timer;
+}
+
 void Egg::moveDown()
 {
     if(y() < game->getHeight()-55)

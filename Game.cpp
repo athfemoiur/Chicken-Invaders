@@ -154,6 +154,7 @@ void Game::schedule()
         }
         else if (level>=2 && level <4){
              Egg::eggs.clear();
+             Hen::hens.clear();
              resboard->hide();
              addChickenAndHen();
         }

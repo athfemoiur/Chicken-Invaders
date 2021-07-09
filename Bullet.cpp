@@ -54,7 +54,6 @@ void Bullet::move()
         else if (typeid((*colliding_items[i])) == typeid(Egg)) {
             game->increasePoint(5);
             game->updateStats();
-            game->updateStats();
             Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i])));
             delete colliding_items[i];
         }
