@@ -165,7 +165,7 @@ void Game::setProgressBar()
     bulletBar = new QProgressBar();
     bulletBar->setGeometry(230,10 , 350 , 50);
     bulletBar->setStyleSheet("background-color:rgba(0,0,0,0);color:rgba(0,0,0,0);");
-    bulletBar->setMaximum(10);
+    bulletBar->setMaximum(15);
     bulletBar->setMinimum(0);
 }
 
@@ -259,7 +259,7 @@ void Game::keyPressEvent(QKeyEvent *event)
          ship->shoot();
          ship->setBcounter();
          bulletBar->setValue(ship->getBcounter());
-         if(ship->getBcounter()== 10){
+         if(ship->getBcounter()== 15){
              ship->setIsHeated(true);
              ship->setHeatTime(gTime);
              ship->resetBcounter();
