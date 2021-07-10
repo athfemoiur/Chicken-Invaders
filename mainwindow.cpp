@@ -6,7 +6,7 @@ extern Game *game;
 mainWindow::mainWindow(int state)
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("D:/cpp/Chicken-Invaders/data.db");
+    db.setDatabaseName("E:/Projects/Chicken-Invaders/data.db");
     db.open();
 
     // hardCode for design
@@ -60,7 +60,7 @@ void mainWindow::exitP()
 
 void mainWindow::showGame()
 {
-    game = new Game(width() , height() , 0);
+    game = new Game(width() , height() , 0 ,false , 0);
     game->show();
     this->hide();
 }
@@ -85,7 +85,8 @@ void mainWindow::loadGame()
     query.exec("SELECT level FROM saved_data");
     query.last();
     int level = query.value(0).toInt();
-    game = new Game(width() , height() , 1);
+    int life = 3;
+    game = new Game(width() , height() , level , true , life);
     game->show();
     this->hide();
 }

@@ -10,7 +10,7 @@
 #include "mainwindow.h"
 extern Game *game;
 
-Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), score(0) ,level(lev) , meat(0) , lostTime(0), isCollided(false) , isLost(false)
+Game::Game(int w , int h , int lev  , bool isl , int l) : gTime(0), width(w),height(h), score(0) ,level(lev) , meat(0) , lostTime(0), life(l), isCollided(false) , isLost(false),isLoaded(isl)
 {
 
     shipTimer = new QTimer;
@@ -322,7 +322,10 @@ void Game::addShip()
     if(level == 0){
         ship = new SpaceShip(shipTimer);
     }
-    else{
+    else if(isLoaded){
+        int tl = life;
+        ship = new SpaceShip(shipTimer , tl);
+    }else if(level >0 && !isLoaded){
         int tl = ship->getLife();
         ship = new SpaceShip(shipTimer , tl);
     }

@@ -19,7 +19,7 @@ class Game : public QGraphicsView
 
 public:
 
-    Game(int , int , int);
+    Game(int , int , int ,bool , int);
     ~Game();
 
 
@@ -82,8 +82,8 @@ private:
     void addSuperChicken();
 
 private:
-    int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level , meat ,lostTime ;
-    bool isCollided , isStarted , isLost;
+    int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level , meat ,lostTime , life ;
+    bool isCollided , isStarted , isLost , isLoaded;
 
 };
 #endif // GAME_H
