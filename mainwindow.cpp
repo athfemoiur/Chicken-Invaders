@@ -55,7 +55,7 @@ mainWindow::mainWindow(int state)
 
 void mainWindow::exitP()
 {
-    exit(1);
+    exit(0);
 }
 
 void mainWindow::showGame()
@@ -82,11 +82,13 @@ void mainWindow::goBackMainPanel()
 void mainWindow::loadGame()
 {
     QSqlQuery query;
-    query.exec("SELECT level FROM saved_data");
+    query.exec("SELECT level, score, life FROM saved_data");
     query.last();
     int level = query.value(0).toInt();
-    int life = 3;
-    game = new Game(width() , height() , level , true , life);
+    int score = query.value(1).toInt();
+    int life = query.value(2).toInt();
+    qDebug() << level << score << life;
+    game = new Game(width() , height() , level , true , life, score);
     game->show();
     this->hide();
 }
@@ -94,7 +96,9 @@ void mainWindow::loadGame()
 void mainWindow::saveGame()
 {
     QSqlQuery query;
-    QString queryString = QString("INSERT INTO saved_data(level) VALUES(%1)").arg(QString::number(game->getLevel()));
+    QString queryString = QString("INSERT INTO saved_data(level, score, life) VALUES(%1, %2, %3)")
+            .arg(QString::number(game->getLevel()), QString::number(game->getScore()), QString::number(game->ship->getLife()));
+    qDebug() << queryString;
     query.exec(queryString);
     exit(0);
 }
