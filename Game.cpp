@@ -7,19 +7,16 @@
 #include "QException"
 #include "Gift.h"
 #include "Superchicken.h"
-
+#include "mainwindow.h"
 extern Game *game;
 
-Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) , meat(0), isCollided(false)
+Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) , meat(0) , lostTime(0), isCollided(false) , isLost(false)
 {
     shipTimer = new QTimer;
     chickTimer = new QTimer;
     henTimer = new QTimer;
     supChickTimer = new QTimer;
     gftTimer = new QTimer;
-
-
-
 
 
     isStarted = false;
@@ -157,8 +154,16 @@ void Game::setNextLevel()
 
 void Game::schedule()
 {
-    if(level == 6 && gameFinishedTime + 2 == gTime)
-        this->close();
+    if(lostTime +3 == gTime && isLost){
+        mainWindow *w = new mainWindow;
+        w->show();
+        game->close();
+    }
+    if(level == 6 && gameFinishedTime + 2 == gTime){
+        mainWindow *w = new mainWindow;
+        w->show();
+        game->close();
+    }
     gTime++;
     for (int i = 0; i < Egg::eggs.size(); i++) {
         if(Egg::eggs[i]->isHited && Egg::eggs[i]->hitTime + 1 == gTime){
@@ -252,17 +257,14 @@ void Game::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void Game::resetLevel()
-{
-    gTime= 0;
-    level=0;
-    isStarted = false;
-    ship->setPos(600 ,600);
-    checkLevel();
-    setscene();
-    setBackground();
-}
 
+void Game::lose()
+{
+    isLost = true;
+    lostTime = gTime;
+    setscene();
+    ship->hide();
+}
 void Game::checkLevel()
 {
     if(level >1){
@@ -322,7 +324,13 @@ void Game::increasePoint(int p)
 
 void Game::addShip()
 {
-    ship = new SpaceShip(shipTimer);
+    if(level == 0){
+        ship = new SpaceShip(shipTimer);
+    }
+    else{
+        int tl = ship->getLife();
+        ship = new SpaceShip(shipTimer , tl);
+    }
     ship->setFlag(QGraphicsItem::ItemIsFocusable);
     ship->setFocus();
 }
@@ -351,11 +359,21 @@ void Game::addScoreBoard()
 
 void Game::addResBoard()
 {
+    if(level == 6){
+        resboard->setPlainText(QString("You Won Game !!"));
+        resboard->setPos(width/2-280,height/2-60);
+        return;
+    }
     resboard = new QGraphicsTextItem;
-    resboard->setPlainText(QString("You Won Level : ") + QString::number(level)+QString("!"));
+    if(isLost){
+        resboard->setPlainText(QString("You Lost :)) !!"));
+        resboard->setPos(width/2-140,height/2-60);
+    }else{
+        resboard->setPlainText(QString("You Won Level : ") + QString::number(level)+QString("!"));
+        resboard->setPos(width/2-280,height/2-60);
+    }
     resboard->setDefaultTextColor(Qt::white);
     resboard->setFont(QFont("Bw Stretch Medium",72));
-    resboard->setPos(width/2-280,height/2-60);
 }
 
 void Game::addMeatBoard()

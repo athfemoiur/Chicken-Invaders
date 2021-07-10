@@ -64,6 +64,8 @@ void Bullet::move()
             game->updateStats();
             Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i])));
             delete colliding_items[i];
+            delete this;
+            return;
         }
     }
 

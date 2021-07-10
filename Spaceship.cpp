@@ -8,7 +8,7 @@
 #include "Superchicken.h"
 extern Game * game;
 
-SpaceShip::SpaceShip(QTimer *t) : life(3) , shootMode(0)
+SpaceShip::SpaceShip(QTimer *t , int l) : life(l) , shootMode(0)
 {
 
     setFocus(); // for focus of keyevents (space)
@@ -55,7 +55,7 @@ void SpaceShip::collision()
                 delete colliding_items[i];
                 game->setChickenNum(game->getChickenNum() - 1);
                 if(getLife()==0){
-                   game->resetLevel();
+                   game->lose();
                 }
 
         }
@@ -80,7 +80,7 @@ void SpaceShip::collision()
             Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i])));
             delete colliding_items[i];
             if(getLife()==0){
-               game->resetLevel();
+               game->lose();
             }
         }
 

@@ -64,7 +64,7 @@ private:
 
     void keyPressEvent(QKeyEvent * event);
     void mouseMoveEvent(QMouseEvent *event);
-    void resetLevel();
+    void lose();
     void checkLevel();
     void increaseMeat();
     void resetMeat();
@@ -83,8 +83,8 @@ private:
     void addSuperChickenAndHen();
     void addSuperChicken();
 private:
-    int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level , meat;
-    bool isCollided , isStarted;
+    int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level , meat ,lostTime ;
+    bool isCollided , isStarted , isLost;
 
 };
 #endif // GAME_H

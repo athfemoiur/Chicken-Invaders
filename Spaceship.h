@@ -7,7 +7,7 @@ class SpaceShip :public QObject , public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    SpaceShip(QTimer *);
+    SpaceShip(QTimer * , int =3);
     void increaseLife();
     void decreaseLife();
     int getLife() { return life; }
