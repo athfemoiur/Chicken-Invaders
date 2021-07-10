@@ -12,9 +12,9 @@ class Chicken :public QObject, public QGraphicsPixmapItem
 public:
 
     Chicken(int, int, int, int, int, QTimer *);
-    QTimer *timer;
-    QTimer *animationTimer;
-    virtual void animation();
+
+    QTimer *timer; // timer for chicken movement
+
     void decreaseHealth();
     int getHealth() const;
 

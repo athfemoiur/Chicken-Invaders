@@ -11,7 +11,7 @@ public:
     // Chicken interface
 
 public:
-    void animation() override;
+
     bool isCollided;
 
 public slots:

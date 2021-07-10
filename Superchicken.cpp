@@ -9,16 +9,11 @@ SuperChicken::SuperChicken(int w, int h, int i, int r, int c, QTimer *t, QTimer 
     health = 4;
     setPixmap(QPixmap(":/Icons/Images/superchicken3.png")); // set icon for bullet object
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
-    animation();
-//    timer->start(150);
+    connect(timer,SIGNAL(timeout()),this,SLOT(SuperChicken::changeState()));;
+
 }
 
-void SuperChicken::animation()
-{
-    animationTimer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(SuperChicken::changeState()));
-    animationTimer->start(190);
-}
+
 
 void SuperChicken::changeState()
 {

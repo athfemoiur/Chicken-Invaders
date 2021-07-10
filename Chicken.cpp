@@ -9,8 +9,7 @@ Chicken::Chicken(int w, int h, int i, int r, int c, QTimer *t) : width(w), heigh
     setPixmap(QPixmap(":/Icons/Images/chicken3.png")); // set icon for bullet object
     timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
-    timer->start(150);
-    animation(); // move every 100 ms
+    connect(timer,SIGNAL(timeout()),this,SLOT(changeState())); // conncet timer to change state function
 
 }
 
@@ -35,12 +34,6 @@ int Chicken::getHealth() const
     return health;
 }
 
-void Chicken::animation()
-{
-    animationTimer = timer;
-    connect(timer,SIGNAL(timeout()),this,SLOT(changeState()));
-    animationTimer->start(150);
-}
 
 void Chicken::decreaseHealth()
 {

@@ -17,7 +17,9 @@ Bullet::Bullet(QTimer *t)
 
 void Bullet::move()
 {
-    QList<QGraphicsItem *> colliding_items = collidingItems();
+    QList<QGraphicsItem *> colliding_items = collidingItems(); // get all of the colliding items
+
+    // check all of the colliding items and do actions based on their types
 
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if (typeid((*colliding_items[i])) == typeid(Chicken) || typeid((*colliding_items[i])) == typeid(Hen)
@@ -31,7 +33,7 @@ void Bullet::move()
               Chicken *temp = dynamic_cast<Chicken *>(colliding_items[i]);
               temp->decreaseHealth();
               if(temp->getHealth() == 0){
-//                temp->setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
+
 
                   if(typeid((*colliding_items[i])) == typeid(Chicken)){
                       game->increasePoint(5);

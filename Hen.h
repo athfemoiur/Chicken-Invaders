@@ -11,7 +11,7 @@ public:
 
 public:
     QTimer *eggMeatTimer;
-    void animation() override;
+
     void dropMeat();
     void dropEgg();
     static QVector<Hen *> hens;
