@@ -39,6 +39,7 @@ Game::Game(int w , int h , int lev  , bool isl , int l, int s) :
 //    musicPlayer->play();
 
 
+
     resboard->hide();
 
     timer->start(1000);
