@@ -3,7 +3,7 @@
 #include "Egg.h"
 
 extern Game * game;
-SuperChicken::SuperChicken(int w, int h, int i, int r, int c, QTimer *t) : Hen(w, h, i, r, c, t)
+SuperChicken::SuperChicken(int w, int h, int i, int r, int c, QTimer *t, QTimer *t2) : Hen(w, h, i, r, c, t, t2)
 {
     isCollided = false;
     health = 4;

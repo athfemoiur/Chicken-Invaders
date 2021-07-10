@@ -6,7 +6,7 @@
 class SuperChicken : public Hen
 {
 public:
-    SuperChicken(int, int, int, int, int, QTimer *);
+    SuperChicken(int, int, int, int, int, QTimer *, QTimer *);
 
     // Chicken interface
 

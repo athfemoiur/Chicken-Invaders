@@ -5,8 +5,9 @@
 QVector <Hen*>Hen::hens;
 
 extern Game * game;
-Hen::Hen(int w, int h, int i, int r, int c, QTimer *t) : Chicken(w, h, i, r, c, t)
+Hen::Hen(int w, int h, int i, int r, int c, QTimer *t, QTimer *t2) : Chicken(w, h, i, r, c, t)
 {
+    eggMeatTimer = t2;
     isCollided = false;
     health = 2;
     setPixmap(QPixmap(":/Icons/Images/hen1.png")); // set icon for bullet object
@@ -25,14 +26,14 @@ void Hen::animation()
 void Hen::dropMeat()
 {
 
-    Meat *meat = new Meat(timer);
+    Meat *meat = new Meat(eggMeatTimer);
     meat->setPos(x() , y()+20);
     scene()->addItem(meat);
 }
 
 void Hen::dropEgg()
 {
-    Egg *egg = new Egg(timer);
+    Egg *egg = new Egg(eggMeatTimer);
     egg->setPos(x() , y()+20);
     Egg::eggs.append(egg);
     scene()->addItem(egg);
