@@ -10,14 +10,16 @@ class mainWindow : public QMainWindow
 {
 
 public:
-    mainWindow();
+    mainWindow(int state);
 
 private slots:
     void exitP();
     void showGame();
+    void resGame();
+    void goBackMainPanel();
 public:
     QPushButton *LoadGame , *Exit , *StartNewGame , *Credits ;
-    int wbtn , hbtn;
+    int wbtn , hbtn ,st;
 };
 
 #endif // MAINWINDOW_H

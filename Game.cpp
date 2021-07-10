@@ -155,12 +155,12 @@ void Game::setNextLevel()
 void Game::schedule()
 {
     if(lostTime +3 == gTime && isLost){
-        mainWindow *w = new mainWindow;
+        mainWindow *w = new mainWindow(0);
         w->show();
         game->close();
     }
     if(level == 6 && gameFinishedTime + 2 == gTime){
-        mainWindow *w = new mainWindow;
+        mainWindow *w = new mainWindow(0);
         w->show();
         game->close();
     }
@@ -236,7 +236,6 @@ void Game::keyPressEvent(QKeyEvent *event)
     }
 
     if (event->key() == Qt::Key_Escape) {
-
         timer->stop();
         shipTimer->stop();
         chickTimer->stop();
@@ -244,17 +243,8 @@ void Game::keyPressEvent(QKeyEvent *event)
         supChickTimer->stop();
         gftTimer->stop();
         isStarted = false;
-
-    }
-    if (event->key() == Qt::Key_Left) {
-          timer->start(1000);
-          shipTimer->start(40);
-          chickTimer->start(150);
-          henTimer->start(150);
-          supChickTimer->start(150);
-          gftTimer->start(40);
-          isStarted = true;
-
+        mainWindow *w = new mainWindow(1);
+        w->show();
     }
 }
 
@@ -497,4 +487,15 @@ void Game::addSuperChicken()
             startX = width/2-100*chikenColumn +200;
         }
     }
+}
+
+void Game::resumGame()
+{
+    timer->start(1000);
+    shipTimer->start(40);
+    chickTimer->start(150);
+    henTimer->start(150);
+    supChickTimer->start(150);
+    gftTimer->start(40);
+    isStarted = true;
 }

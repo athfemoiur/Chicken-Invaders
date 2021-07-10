@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     srand(time(nullptr));
     QApplication a(argc, argv);
-    mainWindow window;
+    mainWindow window(0);
     window.show();
     return a.exec();
 }

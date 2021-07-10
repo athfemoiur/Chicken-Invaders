@@ -34,7 +34,7 @@ public:
     int gTime;
     bool isLevFinished;
     int gameFinishedTime;
-
+    void resumGame();
 private:
 
     QGraphicsScene * scene;
@@ -80,6 +80,7 @@ private:
     void addChickenAndHen();
     void addSuperChickenAndHen();
     void addSuperChicken();
+
 private:
     int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level , meat ,lostTime ;
     bool isCollided , isStarted , isLost;
