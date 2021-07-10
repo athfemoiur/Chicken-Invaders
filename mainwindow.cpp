@@ -87,7 +87,6 @@ void mainWindow::loadGame()
     int level = query.value(0).toInt();
     int score = query.value(1).toInt();
     int life = query.value(2).toInt();
-    qDebug() << level << score << life;
     game = new Game(width() , height() , level , true , life, score);
     game->show();
     this->hide();
@@ -98,7 +97,6 @@ void mainWindow::saveGame()
     QSqlQuery query;
     QString queryString = QString("INSERT INTO saved_data(level, score, life) VALUES(%1, %2, %3)")
             .arg(QString::number(game->getLevel()), QString::number(game->getScore()), QString::number(game->ship->getLife()));
-    qDebug() << queryString;
     query.exec(queryString);
     exit(0);
 }
