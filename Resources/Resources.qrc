@@ -21,6 +21,8 @@
         <file>Images/superchicken2.png</file>
         <file>Images/chicken2.png</file>
         <file>Images/chicken1.png</file>
+        <file>Images/superchicken3.png</file>
+        <file>Images/superchicken4.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/02-01. Main Theme.mp3</file>

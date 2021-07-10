@@ -12,7 +12,7 @@ Meat::Meat(QTimer *t)
 void Meat::moveDown()
 {
     if(y() < game->getHeight()-20)
-        setPos(x(),y() + 37);
+        setPos(x(),y() + 31);
     else {
         scene()->removeItem(this);
         delete this;

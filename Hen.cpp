@@ -34,7 +34,7 @@ void Hen::dropMeat()
 void Hen::dropEgg()
 {
     Egg *egg = new Egg(eggMeatTimer);
-    egg->setPos(x() , y()+20);
+    egg->setPos(x() + 15 , y()+20);
     Egg::eggs.append(egg);
     scene()->addItem(egg);
 }

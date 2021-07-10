@@ -19,10 +19,10 @@ class Game : public QGraphicsView
 
 public:
 
-    Game(int , int , int ,bool , int);
+    Game(int , int , int ,bool , int, int=0);
     ~Game();
 
-
+    SpaceShip *ship;
     int getWidth() const;
     int getHeight() const;
     int getScore() const;
@@ -48,7 +48,7 @@ private:
     QTimer *gftTimer;
     QTimer *eggMeatTimer;
 
-    SpaceShip *ship;
+
 
     QGraphicsTextItem * lifeboard;
     QGraphicsTextItem * scoreboard;

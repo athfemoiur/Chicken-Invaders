@@ -10,7 +10,9 @@
 #include "mainwindow.h"
 extern Game *game;
 
-Game::Game(int w , int h , int lev  , bool isl , int l) : gTime(0), width(w),height(h), score(0) ,level(lev) , meat(0) , lostTime(0), life(l), isCollided(false) , isLost(false),isLoaded(isl)
+Game::Game(int w , int h , int lev  , bool isl , int l, int s) :
+    gTime(0), width(w),height(h), score(s) ,level(lev) , meat(0) ,
+    lostTime(0), life(l), isCollided(false) , isLost(false),isLoaded(isl)
 {
 
     eggMeatTimer = new QTimer;
