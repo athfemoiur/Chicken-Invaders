@@ -9,7 +9,7 @@ Hen::Hen(int w, int h, int i, int r, int c, QTimer *t) : Chicken(w, h, i, r, c, 
 {
     isCollided = false;
     health = 2;
-    setPixmap(QPixmap(":/Icons/Images/hen1.png")); // set icon for bullet object
+    setPixmap(QPixmap(":/Icons/Images/chicken1.png")); // set icon for bullet object
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
     animation();
 //    timer->start(150);
@@ -41,9 +41,9 @@ void Hen::dropEgg()
 void Hen::changeState()
 {
     if(counter % 2 == 0)
-        setPixmap(QPixmap(":/Icons/Images/hen1.png"));
+        setPixmap(QPixmap(":/Icons/Images/chicken1.png"));
     else
-        setPixmap(QPixmap(":/Icons/Images/hen2.png"));
+        setPixmap(QPixmap(":/Icons/Images/chicken2.png"));
     counter++;
 }
 
