@@ -122,6 +122,7 @@ void Game::setscene()
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(width ,height);
+    setProgressBar();
     addShip();
     addScoreBoard();
     addLifeBoard();
@@ -131,6 +132,7 @@ void Game::setscene()
     scene->addItem(lifeboard);
     scene->addItem(scoreboard);
     scene->addItem(resboard);
+    scene->addWidget(bulletBar);
     if(level>=2){
         scene->addItem(meatboard);
     }
@@ -158,8 +160,24 @@ void Game::setNextLevel()
 
 }
 
+void Game::setProgressBar()
+{
+    bulletBar = new QProgressBar();
+    bulletBar->setGeometry(230,10 , 350 , 50);
+    bulletBar->setStyleSheet("background-color:rgba(0,0,0,0);color:rgba(0,0,0,0);");
+    bulletBar->setMaximum(10);
+    bulletBar->setMinimum(0);
+}
+
 void Game::schedule()
 {
+    ship->subBcounter();
+    if(!ship->getIsHeated())
+        bulletBar->setValue(ship->getBcounter());
+    if(isStarted && ship->getIsHeated() && ship->getHeatTime() +4 ==gTime){
+        ship->setIsHeated(false);
+        bulletBar->setValue(0);
+    }
     if(lostTime +3 == gTime && isLost){
         mainWindow *w = new mainWindow(0);
         w->show();
@@ -236,9 +254,16 @@ void Game::schedule()
 
 void Game::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Space && game->isStarted  )
+    if (event->key() == Qt::Key_Space && game->isStarted && !ship->getIsHeated() )
      {
          ship->shoot();
+         ship->setBcounter();
+         bulletBar->setValue(ship->getBcounter());
+         if(ship->getBcounter()== 10){
+             ship->setIsHeated(true);
+             ship->setHeatTime(gTime);
+             ship->resetBcounter();
+         }
     }
 
     if (event->key() == Qt::Key_Escape) {

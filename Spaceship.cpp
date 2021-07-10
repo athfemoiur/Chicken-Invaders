@@ -10,7 +10,9 @@ extern Game * game;
 
 SpaceShip::SpaceShip(QTimer *t , int l) : life(l) , shootMode(0)
 {
-
+    bcounter=0;
+    heatTime =0;
+    isHeated =false;
     setFocus(); // for focus of keyevents (space)
     setPixmap(QPixmap(":/Icons/Images/ship.png"));
     setPos(900 , 900);
@@ -112,4 +114,45 @@ void SpaceShip::shoot()
         scene()->addItem(bullet);
 
     }
+}
+
+bool SpaceShip::getIsHeated() const
+{
+    return isHeated;
+}
+
+void SpaceShip::setIsHeated(bool value)
+{
+    isHeated = value;
+}
+
+int SpaceShip::getBcounter() const
+{
+    return bcounter;
+}
+
+void SpaceShip::setBcounter()
+{
+    bcounter++;
+}
+
+int SpaceShip::getHeatTime() const
+{
+    return heatTime;
+}
+
+void SpaceShip::setHeatTime(int value)
+{
+    heatTime = value;
+}
+
+void SpaceShip::subBcounter()
+{
+    if(bcounter >0)
+        bcounter--;
+}
+
+void SpaceShip::resetBcounter()
+{
+    bcounter=0;
 }

@@ -6,14 +6,13 @@
 #include "Spaceship.h"
 #include "Chicken.h"
 
-
+#include <QProgressBar>
 
 
 class Game : public QGraphicsView
 {
 
     Q_OBJECT
-    friend class Controller;
     friend class SpaceShip;
     friend class Bullet;
 
@@ -54,7 +53,7 @@ private:
     QGraphicsTextItem * scoreboard;
     QGraphicsTextItem * resboard;
     QGraphicsTextItem * meatboard;
-
+    QProgressBar *bulletBar;
 public slots:
 
     void schedule();
@@ -73,6 +72,7 @@ private:
     void setscene();
     void setBackground();
     void setNextLevel();
+    void setProgressBar();
     void addShip();
     void addLifeBoard();
     void addScoreBoard();
@@ -85,7 +85,7 @@ private:
 
 private:
     int time_collid ,width ,height ,chickenRow ,chikenColumn ,score ,chickenNum ,level , meat ,lostTime , life ;
-    bool isCollided , isStarted , isLost , isLoaded;
+    bool isCollided , isStarted , isLost , isLoaded ;
 
 };
 #endif // GAME_H

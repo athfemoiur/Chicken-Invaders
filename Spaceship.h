@@ -22,8 +22,19 @@ private:
 public:
     void shoot();
 
+    bool getIsHeated() const;
+    void setIsHeated(bool value);
+
+    int getBcounter() const;
+    void setBcounter();
+
+    int getHeatTime() const;
+    void setHeatTime(int value);
+    void subBcounter();
+    void resetBcounter();
 private:
-    int life, shootMode;
+    int life, shootMode , bcounter , heatTime;
+    bool isHeated;
 
 };
 
