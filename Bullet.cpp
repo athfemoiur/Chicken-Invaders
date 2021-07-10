@@ -6,12 +6,12 @@
 #include "Superchicken.h"
 extern Game * game;
 
-Bullet::Bullet()
+Bullet::Bullet(QTimer *t)
 {
     setPixmap(QPixmap(":/Icons/Images/bullet.png")); // set icon for bullet object
-    timer = new QTimer(this);
+    timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(move())); // connect the timer to the move function
-    timer->start(40); // move every 40 ms
+
 
 }
 

@@ -1,16 +1,17 @@
 #include "Chicken.h"
 #include "Spaceship.h"
 
-extern Game *game;
-Chicken::Chicken(int w, int h, int i, int r, int c) : width(w), height(h), index(i), row(r), column(c)
+
+
+Chicken::Chicken(int w, int h, int i, int r, int c, QTimer *t) : width(w), height(h), index(i), row(r), column(c)
 {
     health = 1;
     setPixmap(QPixmap(":/Icons/Images/chicken3.png")); // set icon for bullet object
-    timer = new QTimer(this);
+    timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
     timer->start(150);
-    animation();
-     // move every 100 ms
+    animation(); // move every 100 ms
+
 }
 
 void Chicken::moveDown()
@@ -36,7 +37,7 @@ int Chicken::getHealth() const
 
 void Chicken::animation()
 {
-    animationTimer = new QTimer(this);
+    animationTimer = timer;
     connect(timer,SIGNAL(timeout()),this,SLOT(changeState()));
     animationTimer->start(150);
 }

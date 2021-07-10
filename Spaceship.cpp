@@ -8,15 +8,15 @@
 #include "Superchicken.h"
 extern Game * game;
 
-SpaceShip::SpaceShip() : life(3) , shootMode(0)
+SpaceShip::SpaceShip(QTimer *t) : life(3) , shootMode(0)
 {
 
     setFocus(); // for focus of keyevents (space)
     setPixmap(QPixmap(":/Icons/Images/ship.png"));
-    setPos(600 , 600);
-    timer =new QTimer;
+    setPos(900 , 900);
+    timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(collision())); // connect the timer to the move function
-    timer->start(10); // move every 40 ms
+    timer->start(40); // move every 40 ms
 
 }
 
@@ -32,13 +32,6 @@ void SpaceShip::decreaseLife()
 
 
 
-void SpaceShip::keyPressEvent(QKeyEvent *event)
-{
-   if (event->key() == Qt::Key_Space && game->isStarted  )
-    {
-        shoot();
-   }
-}
 
 void SpaceShip::collision()
 {
@@ -103,18 +96,18 @@ void SpaceShip::shoot()
 {
     if(shootMode == 1)
     {
-        bullet = new Bullet();
+        bullet = new Bullet(timer);
         bullet->setPos(x()+15,y()-150);
         scene()->addItem(bullet);
 
-        bullet = new Bullet();
+        bullet = new Bullet(timer);
         bullet->setPos(x()+80,y()-150);
         scene()->addItem(bullet);
     }
     else
     {
 
-        bullet = new Bullet();
+        bullet = new Bullet(timer);
         bullet->setPos(x()+45,y()-150);
         scene()->addItem(bullet);
 

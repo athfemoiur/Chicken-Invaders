@@ -9,7 +9,7 @@ class Meat : public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Meat();
+    Meat(QTimer *);
     QTimer *timer;
 public slots:
     void moveDown();

@@ -7,20 +7,21 @@ class SpaceShip :public QObject , public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    SpaceShip();
+    SpaceShip(QTimer *);
     void increaseLife();
     void decreaseLife();
     int getLife() { return life; }
 public slots:
     void collision();
-private:
-    void keyPressEvent(QKeyEvent * event);// for Handlening Movement
+
+
 
 private:
     Bullet *bullet;
     QTimer *timer;
-private:
+public:
     void shoot();
+
 private:
     int life, shootMode;
 

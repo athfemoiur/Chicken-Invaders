@@ -5,7 +5,7 @@
 class Hen : public Chicken
 {
 public:
-    Hen(int, int, int, int, int);
+    Hen(int, int, int, int, int, QTimer *);
 
     // Chicken interface
 

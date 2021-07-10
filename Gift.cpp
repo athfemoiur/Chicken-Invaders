@@ -1,10 +1,11 @@
 #include "Gift.h"
 #include "Game.h"
 extern Game * game;
-Gift::Gift()
+
+Gift::Gift(QTimer *t)
 {
     setPixmap(QPixmap(":/Icons/Images/gift.png"));
-    timer = new QTimer(this);
+    timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown()));
     timer->start(40); // move every 40 ms
 }

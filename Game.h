@@ -40,8 +40,16 @@ public:
 private:
 
     QGraphicsScene * scene;
+
     QTimer *timer;
+    QTimer *shipTimer;
+    QTimer *chickTimer;
+    QTimer *henTimer;
+    QTimer *supChickTimer;
+    QTimer *gftTimer;
+
     SpaceShip *ship;
+
     QGraphicsTextItem * lifeboard;
     QGraphicsTextItem * scoreboard;
     QGraphicsTextItem * resboard;
@@ -54,7 +62,7 @@ public slots:
 private:
 
 
-
+    void keyPressEvent(QKeyEvent * event);
     void mouseMoveEvent(QMouseEvent *event);
     void resetLevel();
     void checkLevel();
