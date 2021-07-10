@@ -39,12 +39,14 @@ private:
 
     QGraphicsScene * scene;
 
+
     QTimer *timer;
     QTimer *shipTimer;
     QTimer *chickTimer;
     QTimer *henTimer;
     QTimer *supChickTimer;
     QTimer *gftTimer;
+    QTimer *eggMeatTimer;
 
     SpaceShip *ship;
 

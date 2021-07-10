@@ -6,7 +6,7 @@ extern Game *game;
 mainWindow::mainWindow(int state)
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("E:/Projects/Chicken-Invaders/data.db");
+    db.setDatabaseName("D:/cpp/Chicken-Invaders/data.db");
     db.open();
 
     // hardCode for design

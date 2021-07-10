@@ -18,7 +18,7 @@ Egg::Egg(QTimer *t)
 void Egg::moveDown()
 {
     if(y() < game->getHeight()-55)
-        setPos(x(),y() + 44);
+        setPos(x(),y() + 23);
     else {
         setPixmap(QPixmap(":/Icons/Images/fEgg.png"));
         hitTime = game->gTime;

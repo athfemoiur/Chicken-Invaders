@@ -5,11 +5,12 @@
 class Hen : public Chicken
 {
 public:
-    Hen(int, int, int, int, int, QTimer *);
+    Hen(int, int, int, int, int, QTimer *, QTimer *);
 
     // Chicken interface
 
 public:
+    QTimer *eggMeatTimer;
     void animation() override;
     void dropMeat();
     void dropEgg();

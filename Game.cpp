@@ -13,6 +13,7 @@ extern Game *game;
 Game::Game(int w , int h , int lev  , bool isl , int l) : gTime(0), width(w),height(h), score(0) ,level(lev) , meat(0) , lostTime(0), life(l), isCollided(false) , isLost(false),isLoaded(isl)
 {
 
+    eggMeatTimer = new QTimer;
     shipTimer = new QTimer;
     chickTimer = new QTimer;
     henTimer = new QTimer;
@@ -43,6 +44,7 @@ Game::Game(int w , int h , int lev  , bool isl , int l) : gTime(0), width(w),hei
     chickTimer->start(150);
     henTimer->start(150);
     supChickTimer->start(150);
+    eggMeatTimer->start(40);
     gftTimer->start(40);
 
 }
@@ -243,6 +245,7 @@ void Game::keyPressEvent(QKeyEvent *event)
         chickTimer->stop();
         henTimer->stop();
         supChickTimer->stop();
+        eggMeatTimer->stop();
         gftTimer->stop();
         isStarted = false;
         mainWindow *w = new mainWindow(1);
@@ -414,7 +417,7 @@ void Game::addChickenAndHen()
                startX += 160;
            }
            else{
-               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn, henTimer);
+               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn, henTimer, eggMeatTimer);
                Hen::hens.append(hen);
                hen->setPos(startX, startY);
                scene->addItem(hen);
@@ -436,7 +439,7 @@ void Game::addChickenAndHen()
                startX += 160;
            }
            else{
-               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn, henTimer);
+               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn, henTimer, eggMeatTimer);
                Hen::hens.append(hen);
                hen->setPos(startX, startY);
                scene->addItem(hen);
@@ -457,14 +460,14 @@ void Game::addSuperChickenAndHen()
         for(int i=1; i<=chickenNum; i++){
 
             if(i%2 == 0){
-               SuperChicken *chk = new SuperChicken(width, height, i, chickenRow, chikenColumn, supChickTimer);
+               SuperChicken *chk = new SuperChicken(width, height, i, chickenRow, chikenColumn, supChickTimer, eggMeatTimer);
                chk->setPos(startX, startY);
                Hen::hens.append(chk);
                scene->addItem(chk);
                startX += 160;
            }
            else{
-               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn, henTimer);
+               Hen *hen = new Hen(width, height, i, chickenRow, chikenColumn, henTimer, eggMeatTimer);
                Hen::hens.append(hen);
                hen->setPos(startX, startY);
                scene->addItem(hen);
@@ -484,7 +487,7 @@ void Game::addSuperChicken()
     int startX =width/2-100*chikenColumn+200;
     int startY = 0;
     for (int i = 1;i <= chickenNum; i++) {
-        SuperChicken *chk = new SuperChicken(width, height, i, chickenRow, chikenColumn, supChickTimer);
+        SuperChicken *chk = new SuperChicken(width, height, i, chickenRow, chikenColumn, supChickTimer, eggMeatTimer);
         chk->setPos(startX, startY);
         Hen::hens.append(chk);
         scene->addItem(chk);
@@ -504,5 +507,6 @@ void Game::resumGame()
     henTimer->start(150);
     supChickTimer->start(150);
     gftTimer->start(40);
+    eggMeatTimer->start(40);
     isStarted = true;
 }

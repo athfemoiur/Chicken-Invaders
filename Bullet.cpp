@@ -4,6 +4,7 @@
 #include "Hen.h"
 #include "Egg.h"
 #include "Superchicken.h"
+
 extern Game * game;
 
 Bullet::Bullet(QTimer *t)
