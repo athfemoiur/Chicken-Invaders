@@ -1,9 +1,15 @@
 #include "mainwindow.h"
+
+#include "QSqlQuery"
 extern Game *game;
+
 mainWindow::mainWindow(int state)
 {
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("D:/cpp/Chicken-Invaders/data.db");
+    db.open();
+
     // hardCode for design
-    st= state;
     wbtn = 700;
     hbtn = 80;
     setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
@@ -16,12 +22,17 @@ mainWindow::mainWindow(int state)
         this->layout()->addWidget(Credits);
         Credits->setGeometry(x() , y()*2+210 , wbtn , hbtn);
         connect(StartNewGame , &QPushButton::clicked , this , &mainWindow::showGame);
+        connect(LoadGame , &QPushButton::clicked , this , &mainWindow::loadGame);
     }
     else{
         StartNewGame = new QPushButton( "Resume Game" , this);
         LoadGame = new QPushButton("Go back to mainPanel" , this);
         connect(StartNewGame , &QPushButton::clicked , this , &mainWindow::resGame);
         connect(LoadGame , &QPushButton::clicked , this , &mainWindow::goBackMainPanel);
+        Credits = new QPushButton("Save and Quit" , this);
+        this->layout()->addWidget(Credits);
+        Credits->setGeometry(x() , y()*2+210 , wbtn , hbtn);
+        connect(Credits , &QPushButton::clicked , this , &mainWindow::saveGame);
     }
      Exit = new QPushButton("Exit" , this);
      LoadGame->setGeometry(x() , y()*2+90 , wbtn , hbtn);
@@ -66,4 +77,23 @@ void mainWindow::goBackMainPanel()
     w->show();
     this->close();
     game->close();
+}
+
+void mainWindow::loadGame()
+{
+    QSqlQuery query;
+    query.exec("SELECT level FROM saved_data");
+    query.last();
+    int level = query.value(0).toInt();
+    game = new Game(width() , height() , 1);
+    game->show();
+    this->hide();
+}
+
+void mainWindow::saveGame()
+{
+    QSqlQuery query;
+    QString queryString = QString("INSERT INTO saved_data(level) VALUES(%1)").arg(QString::number(game->getLevel()));
+    query.exec(queryString);
+    exit(0);
 }

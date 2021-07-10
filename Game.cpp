@@ -10,8 +10,9 @@
 #include "mainwindow.h"
 extern Game *game;
 
-Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4), score(0) ,level(lev) , meat(0) , lostTime(0), isCollided(false) , isLost(false)
+Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), score(0) ,level(lev) , meat(0) , lostTime(0), isCollided(false) , isLost(false)
 {
+
     shipTimer = new QTimer;
     chickTimer = new QTimer;
     henTimer = new QTimer;
@@ -28,12 +29,13 @@ Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4
     setFocus();
     setBackground();
     setscene();
-
-    auto musicPlayer = new QMediaPlayer;
-    musicPlayer->setMedia(QUrl("qrc:/Sounds/Sounds/02-01. Main Theme.mp3"));
-    musicPlayer->play();
-
     checkLevel();
+
+//    auto musicPlayer = new QMediaPlayer;
+//    musicPlayer->setMedia(QUrl("qrc:/Sounds/Sounds/02-01. Main Theme.mp3"));
+//    musicPlayer->play();
+
+
     resboard->hide();
 
     timer->start(1000);
@@ -257,8 +259,10 @@ void Game::lose()
     ship->hide();
 }
 void Game::checkLevel()
-{
-    if(level >1){
+{   if(level < 2){
+        chickenRow = 4;
+    }
+    else if(level >1){
          chickenRow = 3;
     }
     if(level == 0) {

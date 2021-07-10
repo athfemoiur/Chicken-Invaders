@@ -12,7 +12,6 @@ Bullet::Bullet(QTimer *t)
     timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(move())); // connect the timer to the move function
 
-
 }
 
 void Bullet::move()
