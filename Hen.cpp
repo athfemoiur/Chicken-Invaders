@@ -12,7 +12,7 @@ Hen::Hen(int w, int h, int i, int r, int c, QTimer *t) : Chicken(w, h, i, r, c, 
     setPixmap(QPixmap(":/Icons/Images/hen1.png")); // set icon for bullet object
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
     animation();
-    timer->start(150);
+//    timer->start(150);
 }
 
 void Hen::animation()

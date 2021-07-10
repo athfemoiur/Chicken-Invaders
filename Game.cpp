@@ -39,6 +39,13 @@ Game::Game(int w , int h , int lev) : gTime(0), width(w),height(h), chickenRow(4
     checkLevel();
     resboard->hide();
 
+    timer->start(1000);
+    shipTimer->start(40);
+    chickTimer->start(150);
+    henTimer->start(150);
+    supChickTimer->start(150);
+    gftTimer->start(40);
+
 }
 
 Game::~Game()
@@ -222,7 +229,9 @@ void Game::keyPressEvent(QKeyEvent *event)
      {
          ship->shoot();
     }
-    else if (event->key() == Qt::Key_Escape) {
+    // implemented by athfemoiur molayi
+
+    if (event->key() == Qt::Key_Escape) {
         timer->stop();
         shipTimer->stop();
         chickTimer->stop();
@@ -231,19 +240,15 @@ void Game::keyPressEvent(QKeyEvent *event)
         gftTimer->stop();
         isStarted = false;
     }
-    else if (event->key() == Qt::Key_Enter) {
-/*        shipTimer = new QTimer;
-        chickTimer = new QTimer;
-        henTimer = new QTimer;
-        supChickTimer = new QTimer;
-        gftTimer = new QTimer;
+    if (event->key() == Qt::Key_Left) {
+          timer->start(1000);
+          shipTimer->start(40);
+          chickTimer->start(150);
+          henTimer->start(150);
+          supChickTimer->start(150);
+          gftTimer->start(40);
+          isStarted = true;
 
-        timer->start(1000);
-        shipTimer->start(40);
-        chickTimer->start(150);
-        henTimer->start(150);
-        supChickTimer->start(150);
-        gftTimer->start(40)*/;
     }
 }
 

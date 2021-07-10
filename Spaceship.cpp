@@ -16,7 +16,7 @@ SpaceShip::SpaceShip(QTimer *t) : life(3) , shootMode(0)
     setPos(900 , 900);
     timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(collision())); // connect the timer to the move function
-    timer->start(40); // move every 40 ms
+//    timer->start(40); // move every 40 ms
 
 }
 
