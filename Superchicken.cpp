@@ -7,7 +7,7 @@ SuperChicken::SuperChicken(int w, int h, int i, int r, int c, QTimer *t, QTimer 
 {
     isCollided = false;
     health = 4;
-    setPixmap(QPixmap(":/Icons/Images/superchicken1.png")); // set icon for bullet object
+    setPixmap(QPixmap(":/Icons/Images/superchicken3.png")); // set icon for bullet object
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
     animation();
 //    timer->start(150);
@@ -23,9 +23,9 @@ void SuperChicken::animation()
 void SuperChicken::changeState()
 {
     if(counter % 2 == 0)
-        setPixmap(QPixmap(":/Icons/Images/superchicken1.png"));
+        setPixmap(QPixmap(":/Icons/Images/superchicken3.png"));
     else
-        setPixmap(QPixmap(":/Icons/Images/superchicken2.png"));
+        setPixmap(QPixmap(":/Icons/Images/superchicken4.png"));
     counter++;
 }
 
