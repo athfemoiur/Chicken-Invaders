@@ -11,7 +11,6 @@ CONFIG += c++11
 SOURCES += \
     Bullet.cpp \
     Chicken.cpp \
-    Controller.cpp \
     Egg.cpp \
     Game.cpp \
     Gift.cpp \
@@ -25,7 +24,6 @@ SOURCES += \
 HEADERS += \
     Bullet.h \
     Chicken.h \
-    Controller.h \
     Egg.h \
     Game.h \
     Gift.h \

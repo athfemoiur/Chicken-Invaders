@@ -5,7 +5,6 @@
 #include "Bullet.h"
 #include "Spaceship.h"
 #include "Chicken.h"
-#include <Controller.h>
 
 
 
@@ -34,7 +33,6 @@ public:
     void updateStats();
     int gTime;
     bool isLevFinished;
-    Controller *cnt;
     int gameFinishedTime;
 
 private:

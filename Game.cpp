@@ -234,9 +234,9 @@ void Game::keyPressEvent(QKeyEvent *event)
      {
          ship->shoot();
     }
-    // implemented by athfemoiur molayi
 
     if (event->key() == Qt::Key_Escape) {
+
         timer->stop();
         shipTimer->stop();
         chickTimer->stop();
@@ -244,6 +244,7 @@ void Game::keyPressEvent(QKeyEvent *event)
         supChickTimer->stop();
         gftTimer->stop();
         isStarted = false;
+
     }
     if (event->key() == Qt::Key_Left) {
           timer->start(1000);
