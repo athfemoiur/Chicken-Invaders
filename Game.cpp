@@ -356,6 +356,7 @@ void Game::addShip()
     else if(isLoaded){
         int tl = life;
         ship = new SpaceShip(shipTimer , tl);
+        isLoaded = false;
     }else if(level >0 && !isLoaded){
         int tl = ship->getLife();
         ship = new SpaceShip(shipTimer , tl);
