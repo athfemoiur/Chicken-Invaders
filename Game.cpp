@@ -60,7 +60,17 @@ Game::~Game()
     delete scoreboard;
     delete lifeboard;
     delete timer;
-
+    delete shipTimer;
+    delete chickTimer;
+    delete henTimer;
+    delete supChickTimer;
+    delete gftTimer;
+    delete eggMeatTimer;
+    delete scoreboard;
+    delete meatboard;
+    delete bulletBar;
+    delete ship;
+    delete scene;
 }
 
 

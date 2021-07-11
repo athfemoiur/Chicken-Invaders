@@ -38,7 +38,6 @@ private:
 
     QGraphicsScene * scene;
 
-
     QTimer *timer;
     QTimer *shipTimer;
     QTimer *chickTimer;

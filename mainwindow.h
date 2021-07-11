@@ -12,7 +12,7 @@ class mainWindow : public QMainWindow
 
 public:
     mainWindow(int state);
-
+    ~mainWindow();
 private slots:
     QSqlDatabase db;
     void exitP();

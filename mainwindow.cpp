@@ -6,7 +6,7 @@ extern Game *game;
 mainWindow::mainWindow(int state)
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("D:/cpp/Chicken-Invaders/data.db");
+    db.setDatabaseName("D:/Chicken-Invaders/data.db");
     db.open();
 
     // hardCode for design
@@ -41,9 +41,6 @@ mainWindow::mainWindow(int state)
      this->layout()->addWidget(LoadGame);
     this->layout()->addWidget(Exit);
     StartNewGame->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-
-
-
     Exit->setGeometry(50 , y()*2+350 , 170  ,hbtn);
     Exit->setIcon(QIcon( QPixmap(":/Icons/Images/cross.png")));
     Exit->setIconSize(QSize(35 , 35));
@@ -51,6 +48,14 @@ mainWindow::mainWindow(int state)
     connect(Exit ,&QPushButton::clicked , this , &mainWindow::exitP );
 
 
+}
+
+mainWindow::~mainWindow()
+{
+    delete LoadGame;
+    delete StartNewGame;
+    delete Credits;
+    delete Exit;
 }
 
 void mainWindow::exitP()
