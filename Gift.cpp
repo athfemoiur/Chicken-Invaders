@@ -14,4 +14,6 @@ void Gift::moveDown()
 {
     if(y() < game->getHeight()-55)
         setPos(x(),y() + 20);
+    else
+        delete this;
 }
