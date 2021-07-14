@@ -14,16 +14,11 @@ public:
 
     void dropMeat();
     void dropEgg();
-    static QVector<Hen *> hens;
+    static QVector<Hen *> hens; // keeps track of hens for choosing random egg drop function
     bool isCollided;
 
 public slots:
     void changeState() override;
-
-
-
-
-
 
 };
 

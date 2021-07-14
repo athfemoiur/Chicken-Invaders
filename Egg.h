@@ -13,7 +13,7 @@ public:
     QTimer *timer;
     int hitTime;
     bool isHited;
-    static QVector<Egg *> eggs;
+    static QVector<Egg *> eggs; // keeps track of added eggs to scene
 
 public slots:
     void moveDown();

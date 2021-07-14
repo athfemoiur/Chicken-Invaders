@@ -22,7 +22,6 @@ Game::Game(int w , int h , int lev  , bool isl , int l, int s) :
     supChickTimer = new QTimer;
     gftTimer = new QTimer;
 
-
     isStarted = false;
     isLevFinished = false;
     setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
@@ -35,14 +34,7 @@ Game::Game(int w , int h , int lev  , bool isl , int l, int s) :
     checkLevel();
     setSound();
 
-//    auto musicPlayer = new QMediaPlayer;
-//    musicPlayer->setMedia(QUrl("qrc:/Sounds/Sounds/02-01. Main Theme.mp3"));
-//    musicPlayer->play();
-
-
-
     resboard->hide();
-
     timer->start(1000);
     shipTimer->start(40);
     chickTimer->start(150);
@@ -196,22 +188,25 @@ void Game::setSound(){
 }
 void Game::schedule()
 {
-    ship->subBcounter();
+
+    ship->subBcounter(); // decreasing number of bCounter to stop hits
     if(!ship->getIsHeated())
-        bulletBar->setValue(ship->getBcounter());
+        bulletBar->setValue(ship->getBcounter()); // if not heated decrease progressbar
     if(isStarted && ship->getIsHeated() && ship->getHeatTime() +4 ==gTime){
         ship->setIsHeated(false);
-        bulletBar->setValue(0);
+        bulletBar->setValue(0); // if heated reset value of progressbar
     }
     if(lostTime +3 == gTime && isLost){
         mainWindow *w = new mainWindow(0);
         w->show();
-        game->close();
+        music->stop();
+        game->close(); // won
     }
     if(level == 6 && gameFinishedTime + 2 == gTime){
         mainWindow *w = new mainWindow(0);
         w->show();
-        game->close();
+        music->stop();
+        game->close(); // lose
     }
     gTime++;
     bulletEffect->stop();
@@ -224,7 +219,7 @@ void Game::schedule()
     if(gTime == 15 && level>3 ){
         Gift *gift = new Gift(gftTimer);
         gift->setPos( rand() % width,0);
-        scene->addItem(gift);
+        scene->addItem(gift); // random gift
     }
     if(gTime == 4){
         isStarted = true;
@@ -270,7 +265,7 @@ void Game::schedule()
     }
     if(time_collid + 3 == gTime && isCollided){
         ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
-        isCollided = false;
+        isCollided = false; // returning pic of ship to itselft again
     }
     if(isLevFinished){
         setNextLevel();
@@ -282,7 +277,7 @@ void Game::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Space && game->isStarted && !ship->getIsHeated() )
      {
-          bulletEffect->play();
+         bulletEffect->play();
          ship->shoot();
          ship->setBcounter();
          bulletBar->setValue(ship->getBcounter());

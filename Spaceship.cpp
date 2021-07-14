@@ -18,7 +18,6 @@ SpaceShip::SpaceShip(QTimer *t , int l) : life(l) , shootMode(0)
     setPos(900 , 900);
     timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(collision())); // connect the timer to the move function
-//    timer->start(40); // move every 40 ms
 
 }
 
@@ -43,20 +42,20 @@ void SpaceShip::collision()
                 || typeid((*colliding_items[i])) == typeid(SuperChicken)){
             if(typeid((*colliding_items[i])) == typeid(Hen)){
                 static_cast<Hen *>(colliding_items[i])->isCollided = true;
-                Hen::hens.remove(Hen::hens.indexOf(static_cast<Hen *>(colliding_items[i])));
+                Hen::hens.remove(Hen::hens.indexOf(static_cast<Hen *>(colliding_items[i]))); // removing hen from vector
             }
             else if(typeid((*colliding_items[i])) == typeid(SuperChicken)){
                 dynamic_cast<SuperChicken *>(colliding_items[i])->isCollided = true;
-                Hen::hens.remove(Hen::hens.indexOf(dynamic_cast<SuperChicken *>(colliding_items[i])));
+                Hen::hens.remove(Hen::hens.indexOf(dynamic_cast<SuperChicken *>(colliding_items[i]))); // removing superchicken from vector
             }
                 decreaseLife();
-                game->time_collid = game->gTime;
+                game->time_collid = game->gTime; //getting collision time for explosion
                 game->isCollided = true;
                 game->effect->setMedia(QUrl("qrc:/Sounds/Sounds/explosion.wav"));
                 game->effect->play();
                 setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
                 game->updateStats();
-                delete colliding_items[i];
+                delete colliding_items[i]; // deleting collided item to spaceship
                 game->setChickenNum(game->getChickenNum() - 1);
                 if(getLife()==0){
                    game->lose();
@@ -66,24 +65,23 @@ void SpaceShip::collision()
 
         else if(typeid(*(colliding_items[i])) == typeid(Meat)){
             game->increaseMeat();
-            game->updateStats();
+            game->updateStats(); // updating scorebored
             delete colliding_items[i];
         }
         else if(typeid(*(colliding_items[i])) == typeid(Gift)){
-            shootMode = 1;
+            shootMode = 1; // changing shoot mode to 2
             delete colliding_items[i];
         }
 
         else if(typeid(*(colliding_items[i])) == typeid(Egg)){
             decreaseLife();
-            game->updateStats();
-            game->updateStats();
+            game->updateStats(); // updating life board
             game->time_collid = game->gTime;
             game->isCollided = true;
             game->effect->setMedia(QUrl("qrc:/Sounds/Sounds/explosion.wav"));
             game->effect->play();
             setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
-            Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i])));
+            Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i]))); // removing egg from vector
             delete colliding_items[i];
             if(getLife()==0){
                game->lose();
@@ -102,6 +100,7 @@ void SpaceShip::shoot()
 {
     if(shootMode == 1)
     {
+        // shooting double
         bullet = new Bullet(timer);
         bullet->setPos(x()+15,y()-150);
         scene()->addItem(bullet);
@@ -112,7 +111,7 @@ void SpaceShip::shoot()
     }
     else
     {
-
+        // shooting single
         bullet = new Bullet(timer);
         bullet->setPos(x()+45,y()-150);
         scene()->addItem(bullet);
@@ -129,7 +128,7 @@ void SpaceShip::setIsHeated(bool value)
 {
     isHeated = value;
 }
-
+// for handeling bullet cool down
 int SpaceShip::getBcounter() const
 {
     return bcounter;

@@ -30,7 +30,7 @@ void Bullet::move()
 
               delete this;
 
-              Chicken *temp = dynamic_cast<Chicken *>(colliding_items[i]);
+              Chicken *temp = dynamic_cast<Chicken *>(colliding_items[i]); // casting to access getHealth method
               temp->decreaseHealth();
               if(temp->getHealth() == 0){
 
@@ -42,13 +42,13 @@ void Bullet::move()
                       game->increasePoint(10);
                       dynamic_cast<Hen *>(temp)->isCollided = true;
                       dynamic_cast<Hen *>(temp)->dropMeat();
-                      Hen::hens.remove(Hen::hens.indexOf(static_cast<Hen *>(colliding_items[i])));
+                      Hen::hens.remove(Hen::hens.indexOf(static_cast<Hen *>(colliding_items[i]))); // removing deleted hen from vector
                   }
                   else if(typeid((*colliding_items[i])) == typeid(SuperChicken)){
                       game->increasePoint(10);
                       dynamic_cast<SuperChicken *>(temp)->isCollided = true;
                       dynamic_cast<SuperChicken *>(temp)->dropMeat();
-                      Hen::hens.remove(Hen::hens.indexOf(dynamic_cast<SuperChicken *>(colliding_items[i])));
+                      Hen::hens.remove(Hen::hens.indexOf(dynamic_cast<SuperChicken *>(colliding_items[i]))); //removing deleted supchick from vector
                   }
 
                   game->setChickenNum(game->getChickenNum() - 1);
@@ -64,7 +64,7 @@ void Bullet::move()
         else if (typeid((*colliding_items[i])) == typeid(Egg)) {
             game->increasePoint(5);
             game->updateStats();
-            Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i])));
+            Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i])));//removing deleted egg from vector
             delete colliding_items[i];
             delete this;
             return;

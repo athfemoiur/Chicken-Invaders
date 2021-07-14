@@ -5,6 +5,7 @@
 extern Game * game;
 SuperChicken::SuperChicken(int w, int h, int i, int r, int c, QTimer *t, QTimer *t2) : Hen(w, h, i, r, c, t, t2)
 {
+    //
     isCollided = false;
     health = 4;
     setPixmap(QPixmap(":/Icons/Images/superchicken3.png")); // set icon for bullet object

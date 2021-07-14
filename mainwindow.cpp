@@ -23,7 +23,7 @@ mainWindow::mainWindow(int state)
         Credits->setGeometry(x() , y()*2+210 , wbtn , hbtn);
         connect(StartNewGame , &QPushButton::clicked , this , &mainWindow::showGame);
         connect(LoadGame , &QPushButton::clicked , this , &mainWindow::loadGame);
-         connect(Credits , &QPushButton::clicked , this , &mainWindow::openCredits);
+        connect(Credits , &QPushButton::clicked , this , &mainWindow::openCredits);
     }
     else{
         StartNewGame = new QPushButton( "Resume Game" , this);
@@ -40,13 +40,13 @@ mainWindow::mainWindow(int state)
      StartNewGame->setGeometry(x() , y()*2-30 , wbtn , hbtn);
      this->layout()->addWidget(StartNewGame);
      this->layout()->addWidget(LoadGame);
-    this->layout()->addWidget(Exit);
-    StartNewGame->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-    Exit->setGeometry(50 , y()*2+350 , 170  ,hbtn);
-    Exit->setIcon(QIcon( QPixmap(":/Icons/Images/cross.png")));
-    Exit->setIconSize(QSize(35 , 35));
-    setStyleSheet("QMainWindow{background-image:url(:/Backgrounds/Images/mainbackround.png);}QPushButton{background-color: rgba(92, 185, 95, 180);border-radius:40;font: 63 28pt \"Bw Stretch Medium\";border:2px solid rgb(92, 185, 95);}QPushButton:hover{background-color: rgba(92, 185, 95, 220);color:rgb(117, 234, 118);}QPushButton:pressed{background-color: rgba(92, 185, 95, 245);}");
-    connect(Exit ,&QPushButton::clicked , this , &mainWindow::exitP );
+     this->layout()->addWidget(Exit);
+     StartNewGame->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+     Exit->setGeometry(50 , y()*2+350 , 170  ,hbtn);
+     Exit->setIcon(QIcon( QPixmap(":/Icons/Images/cross.png")));
+     Exit->setIconSize(QSize(35 , 35));
+     setStyleSheet("QMainWindow{background-image:url(:/Backgrounds/Images/mainbackround.png);}QPushButton{background-color: rgba(92, 185, 95, 180);border-radius:40;font: 63 28pt \"Bw Stretch Medium\";border:2px solid rgb(92, 185, 95);}QPushButton:hover{background-color: rgba(92, 185, 95, 220);color:rgb(117, 234, 118);}QPushButton:pressed{background-color: rgba(92, 185, 95, 245);}");
+     connect(Exit ,&QPushButton::clicked , this , &mainWindow::exitP );
 
 
 }
@@ -93,6 +93,7 @@ void mainWindow::showGame()
 void mainWindow::resGame()
 {
     this->hide();
+    stopSound();
     game->resumGame();
 }
 
@@ -107,6 +108,7 @@ void mainWindow::goBackMainPanel()
 
 void mainWindow::loadGame()
 {
+    // getting datas from database (sqlLite)
     QSqlQuery query;
     query.exec("SELECT level, score, life FROM saved_data");
     query.last();
@@ -121,6 +123,7 @@ void mainWindow::loadGame()
 
 void mainWindow::saveGame()
 {
+    // inserting datas into database (sqlLite)
     QSqlQuery query;
     QString queryString = QString("INSERT INTO saved_data(level, score, life) VALUES(%1, %2, %3)")
             .arg(QString::number(game->getLevel()), QString::number(game->getScore()), QString::number(game->ship->getLife()));
@@ -130,7 +133,7 @@ void mainWindow::saveGame()
 void mainWindow::openCredits()
 {
     msg = new QMessageBox;
-    msg->setText("This Game Was developed By Mohammad.J.Njafi And AmirBonakdar");
+    msg->setText("This Game Was developed By Mohammad.J.Njafi And AmirHoseinBonakdar");
     msg->setWindowTitle("Credits");
     msg->setIcon(QMessageBox::Information);
     msg->exec();

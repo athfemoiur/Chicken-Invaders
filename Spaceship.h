@@ -13,25 +13,20 @@ public:
     int getLife() { return life; }
 public slots:
     void collision();
-
-
-
 private:
     Bullet *bullet;
     QTimer *timer;
 public:
     void shoot();
-
     bool getIsHeated() const;
     void setIsHeated(bool value);
-
     int getBcounter() const;
     void setBcounter();
-
     int getHeatTime() const;
     void setHeatTime(int value);
     void subBcounter();
     void resetBcounter();
+
 private:
     int life, shootMode , bcounter , heatTime;
     bool isHeated;

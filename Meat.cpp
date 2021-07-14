@@ -3,10 +3,10 @@
 extern Game * game;
 Meat::Meat(QTimer *t)
 {
+
     setPixmap(QPixmap(":/Icons/Images/drumsticChickenone.png")); // set icon for meat object
     timer = t;
     connect(timer,SIGNAL(timeout()),this,SLOT(moveDown())); // connect the timer to the move function
-//    timer->start(80); // move every 40 ms
 }
 
 void Meat::moveDown()
