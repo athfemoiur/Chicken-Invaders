@@ -27,8 +27,6 @@
     <qresource prefix="/Sounds">
         <file>Sounds/02-04. Main Theme (Remastered).mp3</file>
         <file>Sounds/03-02. Mission 1.mp3</file>
-        <file>Sounds/03-03. Mission 2.mp3</file>
-        <file>Sounds/03-04. Mission 3.mp3</file>
         <file>Sounds/explosion.wav</file>
         <file>Sounds/heat-vision.mp3</file>
     </qresource>

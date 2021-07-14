@@ -182,8 +182,6 @@ void Game::setSound(){
     effect->setMedia(QUrl("qrc:/Sounds/Sounds/explosion.wav"));
     playlist = new QMediaPlaylist();
     playlist->addMedia(QUrl("qrc:/Sounds/Sounds/03-02. Mission 1.mp3"));
-    playlist->addMedia(QUrl("qrc:/Sounds/Sounds/03-03. Mission 2.mp3"));
-    playlist->addMedia(QUrl("qrc:/Sounds/Sounds/03-04. Mission 3.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
 
     music = new QMediaPlayer();
@@ -311,7 +309,7 @@ void Game::keyPressEvent(QKeyEvent *event)
         eggMeatTimer->stop();
         gftTimer->stop();
         isStarted = false;
-        music->stop();
+        music->pause();
         mainWindow *w = new mainWindow(1);
         w->show();
     }
