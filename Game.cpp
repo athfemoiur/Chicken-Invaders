@@ -8,6 +8,7 @@
 #include "Gift.h"
 #include "Superchicken.h"
 #include "mainwindow.h"
+
 extern Game *game;
 
 Game::Game(int w , int h , int lev  , bool isl , int l, int s) :
@@ -175,7 +176,10 @@ void Game::setProgressBar()
 void Game::setSound(){
     bulletEffect= new QMediaPlayer;
     bulletEffect->setMedia(QUrl("qrc:/Sounds/Sounds/heat-vision.mp3"));
+    bulletEffect->setVolume(4);
     effect = new QMediaPlayer;
+    effect->setVolume(4);
+    effect->setMedia(QUrl("qrc:/Sounds/Sounds/explosion.wav"));
     playlist = new QMediaPlaylist();
     playlist->addMedia(QUrl("qrc:/Sounds/Sounds/03-02. Mission 1.mp3"));
     playlist->addMedia(QUrl("qrc:/Sounds/Sounds/03-03. Mission 2.mp3"));
@@ -184,6 +188,7 @@ void Game::setSound(){
 
     music = new QMediaPlayer();
     music->setPlaylist(playlist);
+    music->setVolume(8);
     music->play();
 }
 void Game::schedule()
@@ -247,16 +252,25 @@ void Game::schedule()
     }
     if(gTime % 5 == 0 && (level ==2 || level ==3)){
         int tempRand = rand() % 4;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < Hen::hens.size() / 4; i++) {
             if (tempRand < Hen::hens.size() - 1){
                 Hen::hens[tempRand]->dropEgg();
             }
             tempRand++;
         }
     }
-    if(gTime % 6 == 0 && level > 3){
+    if(gTime % 6 == 0 && level == 4){
         int tempRand = rand() % 4;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < Hen::hens.size() / 3; i++) {
+            if (tempRand < Hen::hens.size() - 1){
+                Hen::hens[tempRand]->dropEgg();
+            }
+            tempRand++;
+        }
+    }
+    if(gTime % 7 == 0 && level == 5){
+        int tempRand = rand() % 4;
+        for (int i = 0; i < Hen::hens.size() / 2; i++) {
             if (tempRand < Hen::hens.size() - 1){
                 Hen::hens[tempRand]->dropEgg();
             }

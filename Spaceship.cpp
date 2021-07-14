@@ -51,7 +51,7 @@ void SpaceShip::collision()
                 decreaseLife();
                 game->time_collid = game->gTime; //getting collision time for explosion
                 game->isCollided = true;
-                game->effect->setMedia(QUrl("qrc:/Sounds/Sounds/explosion.wav"));
+                game->effect->stop();
                 game->effect->play();
                 setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
                 game->updateStats();
@@ -78,7 +78,7 @@ void SpaceShip::collision()
             game->updateStats(); // updating life board
             game->time_collid = game->gTime;
             game->isCollided = true;
-            game->effect->setMedia(QUrl("qrc:/Sounds/Sounds/explosion.wav"));
+            game->effect->stop();
             game->effect->play();
             setPixmap(QPixmap(":/Icons/Images/explosion_PNG15391.png"));
             Egg::eggs.remove(Egg::eggs.indexOf(static_cast<Egg *>(colliding_items[i]))); // removing egg from vector
