@@ -5,7 +5,8 @@
 #include "Bullet.h"
 #include "Spaceship.h"
 #include "Chicken.h"
-
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 #include <QProgressBar>
 
 
@@ -53,6 +54,12 @@ private:
     QGraphicsTextItem * resboard;
     QGraphicsTextItem * meatboard;
     QProgressBar *bulletBar;
+
+    QMediaPlayer *bulletEffect;
+    QMediaPlayer *effect;
+    QMediaPlayer *music;
+    QMediaPlaylist *playlist;
+
 public slots:
 
     void schedule();
@@ -72,6 +79,7 @@ private:
     void setBackground();
     void setNextLevel();
     void setProgressBar();
+    void setSound();
     void addShip();
     void addLifeBoard();
     void addScoreBoard();

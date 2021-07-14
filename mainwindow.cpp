@@ -6,7 +6,7 @@ extern Game *game;
 mainWindow::mainWindow(int state)
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("D:/cpp/Chicken-Invaders/data.db");
+    db.setDatabaseName("E:/Chicken-Invaders/data.db");
     db.open();
 
     // hardCode for design
@@ -14,7 +14,7 @@ mainWindow::mainWindow(int state)
     hbtn = 80;
     setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
     showMaximized();
-
+    playSound();
     if(state ==0){
         StartNewGame = new QPushButton( "Start New Game" , this);
         LoadGame = new QPushButton("Load Game" , this);
@@ -23,6 +23,7 @@ mainWindow::mainWindow(int state)
         Credits->setGeometry(x() , y()*2+210 , wbtn , hbtn);
         connect(StartNewGame , &QPushButton::clicked , this , &mainWindow::showGame);
         connect(LoadGame , &QPushButton::clicked , this , &mainWindow::loadGame);
+         connect(Credits , &QPushButton::clicked , this , &mainWindow::openCredits);
     }
     else{
         StartNewGame = new QPushButton( "Resume Game" , this);
@@ -56,6 +57,8 @@ mainWindow::~mainWindow()
     delete StartNewGame;
     delete Credits;
     delete Exit;
+    delete music;
+    delete playlist;
 }
 
 void mainWindow::exitP()
@@ -63,10 +66,27 @@ void mainWindow::exitP()
     exit(0);
 }
 
+void mainWindow::playSound()
+{
+    playlist = new QMediaPlaylist();
+    playlist->addMedia(QUrl("qrc:/Sounds/Sounds/02-04. Main Theme (Remastered).mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
+    music = new QMediaPlayer();
+    music->setPlaylist(playlist);
+    music->play();
+}
+
+void mainWindow::stopSound()
+{
+    music->stop();
+}
+
 void mainWindow::showGame()
 {
     game = new Game(width() , height() , 0 ,false , 0);
     game->show();
+    stopSound();
     this->hide();
 }
 
@@ -81,6 +101,7 @@ void mainWindow::goBackMainPanel()
     mainWindow *w = new mainWindow(0);
     w->show();
     this->close();
+    stopSound();
     game->close();
 }
 
@@ -94,6 +115,7 @@ void mainWindow::loadGame()
     int life = query.value(2).toInt();
     game = new Game(width() , height() , level , true , life, score);
     game->show();
+    stopSound();
     this->hide();
 }
 
@@ -104,4 +126,12 @@ void mainWindow::saveGame()
             .arg(QString::number(game->getLevel()), QString::number(game->getScore()), QString::number(game->ship->getLife()));
     query.exec(queryString);
     exit(0);
+}
+void mainWindow::openCredits()
+{
+    msg = new QMessageBox;
+    msg->setText("This Game Was developed By Mohammad.J.Njafi And AmirBonakdar");
+    msg->setWindowTitle("Credits");
+    msg->setIcon(QMessageBox::Information);
+    msg->exec();
 }

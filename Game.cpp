@@ -33,6 +33,7 @@ Game::Game(int w , int h , int lev  , bool isl , int l, int s) :
     setBackground();
     setscene();
     checkLevel();
+    setSound();
 
 //    auto musicPlayer = new QMediaPlayer;
 //    musicPlayer->setMedia(QUrl("qrc:/Sounds/Sounds/02-01. Main Theme.mp3"));
@@ -179,7 +180,20 @@ void Game::setProgressBar()
     bulletBar->setMaximum(15);
     bulletBar->setMinimum(0);
 }
+void Game::setSound(){
+    bulletEffect= new QMediaPlayer;
+    bulletEffect->setMedia(QUrl("qrc:/Sounds/Sounds/heat-vision.mp3"));
+    effect = new QMediaPlayer;
+    playlist = new QMediaPlaylist();
+    playlist->addMedia(QUrl("qrc:/Sounds/Sounds/03-02. Mission 1.mp3"));
+    playlist->addMedia(QUrl("qrc:/Sounds/Sounds/03-03. Mission 2.mp3"));
+    playlist->addMedia(QUrl("qrc:/Sounds/Sounds/03-04. Mission 3.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
 
+    music = new QMediaPlayer();
+    music->setPlaylist(playlist);
+    music->play();
+}
 void Game::schedule()
 {
     ship->subBcounter();
@@ -200,6 +214,7 @@ void Game::schedule()
         game->close();
     }
     gTime++;
+    bulletEffect->stop();
     for (int i = 0; i < Egg::eggs.size(); i++) {
         if(Egg::eggs[i]->isHited && Egg::eggs[i]->hitTime + 1 == gTime){
             delete Egg::eggs[i];
@@ -253,7 +268,7 @@ void Game::schedule()
             tempRand++;
         }
     }
-    if(time_collid + 1 == gTime){
+    if(time_collid + 3 == gTime && isCollided){
         ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
         isCollided = false;
     }
@@ -267,6 +282,7 @@ void Game::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Space && game->isStarted && !ship->getIsHeated() )
      {
+          bulletEffect->play();
          ship->shoot();
          ship->setBcounter();
          bulletBar->setValue(ship->getBcounter());
@@ -286,6 +302,7 @@ void Game::keyPressEvent(QKeyEvent *event)
         eggMeatTimer->stop();
         gftTimer->stop();
         isStarted = false;
+        music->stop();
         mainWindow *w = new mainWindow(1);
         w->show();
     }
@@ -297,6 +314,7 @@ void Game::lose()
     isLost = true;
     lostTime = gTime;
     setscene();
+    music->stop();
     ship->hide();
 }
 void Game::checkLevel()
@@ -548,4 +566,5 @@ void Game::resumGame()
     gftTimer->start(40);
     eggMeatTimer->start(40);
     isStarted = true;
+    music->play();
 }
