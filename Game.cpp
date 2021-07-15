@@ -203,27 +203,28 @@ void Game::schedule()
         mainWindow *w = new mainWindow(0);
         w->show();
         music->stop();
-        game->close(); // won
+        game->close(); // lose
     }
     if(level == 6 && gameFinishedTime + 2 == gTime){
         mainWindow *w = new mainWindow(0);
         w->show();
         music->stop();
-        game->close(); // lose
+        game->close(); // won
     }
     gTime++;
-    bulletEffect->stop();
-    for (int i = 0; i < Egg::eggs.size(); i++) {
+
+    for (int i = 0; i < Egg::eggs.size(); i++) {  // removing the f eggs after 1 seconds
         if(Egg::eggs[i]->isHited && Egg::eggs[i]->hitTime + 1 == gTime){
             delete Egg::eggs[i];
             Egg::eggs.removeAt(i);
         }
     }
-    if(gTime == 15 && level>3 ){
+    if(gTime == 15 && level>3 ){ // for droping gift after 15 seconds
         Gift *gift = new Gift(gftTimer);
         gift->setPos( rand() % width,0);
         scene->addItem(gift); // random gift
     }
+
     if(gTime == 4){
         isStarted = true;
         if(level<2){
@@ -248,7 +249,8 @@ void Game::schedule()
             addSuperChicken();
         }
     }
-    if(gTime % 5 == 0 && (level ==2 || level ==3)){
+
+    if(gTime % 5 == 0 && (level ==2 || level ==3)){ // for droping eggs randomly
         int tempRand = rand() % 4;
         for (int i = 0; i < Hen::hens.size() / 4; i++) {
             if (tempRand < Hen::hens.size() - 1){
@@ -259,7 +261,7 @@ void Game::schedule()
     }
     if(gTime % 6 == 0 && level == 4){
         int tempRand = rand() % 4;
-        for (int i = 0; i < Hen::hens.size() / 3; i++) {
+        for (int i = 0; i < Hen::hens.size() / 3; i++) { // for droping eggs randomly
             if (tempRand < Hen::hens.size() - 1){
                 Hen::hens[tempRand]->dropEgg();
             }
@@ -268,13 +270,14 @@ void Game::schedule()
     }
     if(gTime % 7 == 0 && level == 5){
         int tempRand = rand() % 4;
-        for (int i = 0; i < Hen::hens.size() / 2; i++) {
+        for (int i = 0; i < Hen::hens.size() / 2; i++) { // for droping eggs randomly
             if (tempRand < Hen::hens.size() - 1){
                 Hen::hens[tempRand]->dropEgg();
             }
             tempRand++;
         }
     }
+
     if(time_collid + 3 == gTime && isCollided){
         ship->setPixmap(QPixmap(":/Icons/Images/ship.png"));
         isCollided = false; // returning pic of ship to itselft again
@@ -289,6 +292,7 @@ void Game::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Space && game->isStarted && !ship->getIsHeated() )
      {
+         bulletEffect->stop();
          bulletEffect->play();
          ship->shoot();
          ship->setBcounter();
@@ -320,10 +324,11 @@ void Game::lose()
 {
     isLost = true;
     lostTime = gTime;
-    setscene();
+    setscene(); // for showing the last result board
     music->stop();
     ship->hide();
 }
+
 void Game::checkLevel()
 {   if(level < 2){
         chickenRow = 4;
@@ -386,13 +391,13 @@ void Game::increasePoint(int p)
 void Game::addShip()
 {
     if(level == 0){
-        ship = new SpaceShip(shipTimer);
+        ship = new SpaceShip(shipTimer); // loading ship for the first time with 3 lives
     }
-    else if(isLoaded){
+    else if(isLoaded){ // loading ship from database with stored lives
         int tl = life;
         ship = new SpaceShip(shipTimer , tl);
         isLoaded = false;
-    }else if(level >0 && !isLoaded){
+    }else if(level >0 && !isLoaded){ // loading ship after passing level(not from database)
         int tl = ship->getLife();
         ship = new SpaceShip(shipTimer , tl);
     }
@@ -450,7 +455,7 @@ void Game::addMeatBoard()
     meatboard->setPos(160,970);
 }
 
-void Game::addChicken()
+void Game::addChicken() // adding chickens based on the row and columns
 {
     int startX =width/2-100*chikenColumn+40;
     int startY = 0;
@@ -496,7 +501,7 @@ void Game::addChickenAndHen()
     }else if (level == 3) {
         for(int i=1; i<=chickenNum; i++){
 
-            if(i%4 == 1 || i%4 ==2){
+            if(i%4 == 1 || i%4 ==2){  // for placing 2 hens and  2 chickens
                Chicken *chk = new Chicken(width, height, i, chickenRow, chikenColumn, chickTimer);
                chk->setPos(startX, startY);
                scene->addItem(chk);

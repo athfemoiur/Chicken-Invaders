@@ -74,6 +74,7 @@ void mainWindow::playSound()
 
     music = new QMediaPlayer();
     music->setPlaylist(playlist);
+    music->setVolume(12);
     music->play();
 }
 

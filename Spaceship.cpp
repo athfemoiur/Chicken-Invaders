@@ -98,6 +98,7 @@ void SpaceShip::collision()
 
 void SpaceShip::shoot()
 {
+
     if(shootMode == 1)
     {
         // shooting double
