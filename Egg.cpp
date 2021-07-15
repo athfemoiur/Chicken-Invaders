@@ -17,7 +17,7 @@ Egg::Egg(QTimer *t)
 void Egg::moveDown()
 {
     if(y() < game->getHeight()-55)
-        setPos(x(),y() + 23);
+        setPos(x(),y() + 22);
     else {
         setPixmap(QPixmap(":/Icons/Images/fEgg.png")); // changing to fried egg
         hitTime = game->gTime; // keeping hit time for removing fried egg

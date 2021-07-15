@@ -195,7 +195,7 @@ void Game::schedule()
     ship->subBcounter(); // decreasing number of bCounter to stop hits
     if(!ship->getIsHeated())
         bulletBar->setValue(ship->getBcounter()); // if not heated decrease progressbar
-    if(isStarted && ship->getIsHeated() && ship->getHeatTime() +4 ==gTime){
+    if(isStarted && ship->getIsHeated() && ship->getHeatTime() +2 ==gTime){
         ship->setIsHeated(false);
         bulletBar->setValue(0); // if heated reset value of progressbar
     }

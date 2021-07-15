@@ -72,7 +72,7 @@ void Bullet::move()
     }
 
     if(y() > 5)
-        setPos(x(),y() - 50);
+        setPos(x(),y() - 48);
     else {
         scene()->removeItem(this);
         delete this;
